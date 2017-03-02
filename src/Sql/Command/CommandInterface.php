@@ -32,6 +32,7 @@ namespace DSchoenbauer\Sql\Command;
 interface CommandInterface {
     
     public function getSql();
+    public function getData();
     public function execute(\PDO $pdo);
     
 }
