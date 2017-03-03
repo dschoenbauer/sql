@@ -26,42 +26,40 @@
 
 namespace DSchoenbauer\Sql\Command;
 
-use DSchoenbauer\Sql\Exception\EmptyDatasetException;
+use DSchoenbauer\Sql\Exception\MethodNotValidException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 
 /**
- * Description of Update
+ * Description of Delete
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Update implements CommandInterface {
+class Delete implements CommandInterface {
 
     private $_table;
-    private $_data = [];
-    
-    use WhereTrait;
 
-    public function __construct($table, array $data, WhereStatementInterface $where = null) {
-        $this->setTable($table)->setData($data)->setWhere($where);
+    use WhereTrait;
+    
+    public function __construct($table, WhereStatementInterface $where = null) {
+        $this->setTable($table)->setWhere($where);
     }
 
     public function execute(PDO $pdo) {
         $s = $pdo->prepare($this->getSql());
-        return $s->execute($this->getCombinedData());
+        if (count($this->getWhereData()) > 0) {
+            return $s->execute($this->getWhereData());
+        }
+        return $s->execute();
+    }
+
+    public function getData() {
+        throw new MethodNotValidException();
     }
 
     public function getSql() {
-        if (count($this->getData()) === 0) {
-            throw new EmptyDatasetException();
-        }
-
-        $sets = array_map(function($value) {
-            return sprintf('%1$s = :%1$s', $value);
-        }, array_keys($this->getData()));
-        $where = $this->getWhereStatement();
-        $sqlTemplate = "UPDATE %s SET %s %s";
-        return trim(sprintf($sqlTemplate, $this->getTable(), implode(',', $sets), $where));
+        $sqlTemplate = 'DELETE FROM %1$s %2$s';
+        return trim(sprintf($sqlTemplate, $this->getTable(), $this->getWhereStatement()));
     }
 
     public function getTable() {
@@ -70,20 +68,6 @@ class Update implements CommandInterface {
 
     public function setTable($table) {
         $this->_table = $table;
-        return $this;
-    }
-
-    public function getCombinedData() {
-        $whereData = $this->getWhereData();
-        return array_merge($this->getData(), $whereData);
-    }
-
-    public function getData() {
-        return $this->_data;
-    }
-
-    public function setData($data) {
-        $this->_data = $data;
         return $this;
     }
 

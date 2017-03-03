@@ -26,26 +26,23 @@
 
 namespace DSchoenbauer\Sql\Command;
 
-use DSchoenbauer\Sql\Exception\EmptyDatasetException;
-use DSchoenbauer\Sql\Where\WhereStatementInterface;
+use DSchoenbauer\Sql\Exception\MethodNotValidException;
 use PHPUnit_Framework_TestCase;
 
 /**
- * Description of CommandTest
+ * Description of DeleteTest
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class UpdateTest extends PHPUnit_Framework_TestCase {
+class DeleteTest extends PHPUnit_Framework_TestCase {
 
     private $_object;
 
     protected function setUp() {
-        $table = "someTable";
-        $data = ['id' => 100];
-        $this->_object = new Update($table, $data);
+        $this->_object = new Delete('someTable');
     }
 
-    public function testTableFromConstruct() {
+    public function testTableFromConstructor() {
         $this->assertEquals('someTable', $this->_object->getTable());
     }
 
@@ -53,63 +50,63 @@ class UpdateTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals('someOtherTable', $this->_object->setTable('someOtherTable')->getTable());
     }
 
-    public function testDataFromConstructor() {
-        $this->assertEquals(['id' => 100], $this->_object->getData());
-    }
-
-    public function testData() {
-        $data = ['id' => 100, 'name' => 'bob'];
-        $this->assertEquals($data, $this->_object->setData($data)->getData());
+    public function testGetData() {
+        $this->expectException(MethodNotValidException::class);
+        $this->_object->getData();
     }
 
     public function testGetSql() {
-        $this->assertEquals('UPDATE someTable SET id = :id', $this->_object->getSql());
+        $this->assertEquals("DELETE FROM someTable", $this->_object->getSql());
     }
 
-    public function testGetSqlNoData() {
-        $this->expectException(EmptyDatasetException::class);
-        $this->_object->setData([])->getSql();
-    }
-
-    public function testGetSqlWhere() {
-        $mock = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
+    public function testGetSqlWithWhere() {
+        $mock = $this->getMockBuilder(\DSchoenbauer\Sql\Where\WhereStatementInterface::class)->getMock();
         $mock->expects($this->once())
-                ->method('getStatement')->willReturn('1 = 1');
-        $this->assertEquals("UPDATE someTable SET id = :id WHERE 1 = 1", $this->_object->setWhere($mock)->getSql());
+                ->method('getStatement')
+                ->willReturn('1 = 1');
+        $this->assertEquals("DELETE FROM someTable WHERE 1 = 1", $this->_object->setWhere($mock)->getSql());
     }
 
-    public function testCombinedData() {
-        $mock = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
-        $mock->expects($this->once())
-                ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
-        $this->assertEquals(['field' => 'where', 'sql' => 1, 'where' => 1], $this->_object->setWhere($mock)->setData(['field' => 'sql', 'sql' => 1])->getCombinedData());
-    }
-    
-    public function testExecute(){
-        
-        $mockWhere = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
+    public function testExecuteWithWhere() {
+        $mockWhere = $this->getMockBuilder(\DSchoenbauer\Sql\Where\WhereStatementInterface::class)->getMock();
         $mockWhere->expects($this->any())
                 ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
         $mockWhere->expects($this->once())
                 ->method('getStatement')->willReturn('1 = 1');
 
-        $this->_object->setWhere($mockWhere)->setData(['data'=>1]);
-        
+        $this->_object->setWhere($mockWhere);
+
         $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
-                ->with($this->_object->getCombinedData())
+                ->with($this->_object->getWhereData())
                 ->willReturn(true);
-        
-        
+
+
         $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
                 ->method('prepare')
-                ->with('UPDATE someTable SET data = :data WHERE 1 = 1')
-                ->willReturn($mockStatement);      
+                ->with('DELETE FROM someTable WHERE 1 = 1')
+                ->willReturn($mockStatement);
 
-        
         $this->assertTrue($this->_object->execute($mockPdo));
-                
     }
+
+    public function testExecuteNoWhere() {
+        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement->expects($this->once())
+                ->method('execute')
+                ->with()
+                ->willReturn(true);
+
+
+        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo->expects($this->once())
+                ->method('prepare')
+                ->with('DELETE FROM someTable')
+                ->willReturn($mockStatement);
+
+        $this->assertTrue($this->_object->execute($mockPdo));
+    }
+
 }
