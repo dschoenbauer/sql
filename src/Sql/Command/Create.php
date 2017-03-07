@@ -59,12 +59,16 @@ class Create implements CommandInterface {
     }
 
     public function execute(PDO $pdo) {
-        $sql = $this->getSql();
-        $stmt = $pdo->prepare($sql);
-        if (!$stmt->execute($this->getData())) {
-            throw new ExecutionErrorException();
+        try {
+            $sql = $this->getSql();
+            $stmt = $pdo->prepare($sql);
+            if (!$stmt->execute($this->getData())) {
+                throw new ExecutionErrorException($stmt->errorInfo()[2]);
+            }
+            return $pdo->lastInsertId();
+        } catch (\Exception $exc) {
+            throw new ExecutionErrorException($exc->getMessage());
         }
-        return $pdo->lastInsertId();
     }
 
     public function getTable() {

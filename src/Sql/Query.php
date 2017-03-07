@@ -38,7 +38,7 @@ use PDO;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Sql {
+class Query {
     
     public static function with(){
         return new static();

@@ -27,7 +27,10 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
+use DSchoenbauer\Tests\Sql\MockPdo;
+use PDOStatement;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -95,14 +98,14 @@ class UpdateTest extends PHPUnit_Framework_TestCase {
 
         $this->_object->setWhere($mockWhere)->setData(['data'=>1]);
         
-        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
                 ->with($this->_object->getCombinedData())
                 ->willReturn(true);
         
         
-        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
                 ->method('prepare')
                 ->with('UPDATE someTable SET data = :data WHERE 1 = 1')
@@ -110,6 +113,45 @@ class UpdateTest extends PHPUnit_Framework_TestCase {
 
         
         $this->assertTrue($this->_object->execute($mockPdo));
-                
+    }
+    public function testExecuteFail(){
+        
+        $mockWhere = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
+        $mockWhere->expects($this->any())
+                ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
+        $mockWhere->expects($this->once())
+                ->method('getStatement')->willReturn('1 = 1');
+
+        $this->_object->setWhere($mockWhere)->setData(['data'=>1]);
+        
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
+        $mockStatement->expects($this->once())
+                ->method('execute')
+                ->with($this->_object->getCombinedData())
+                ->willThrowException(new \Exception('test'));
+        
+        
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo->expects($this->once())
+                ->method('prepare')
+                ->with('UPDATE someTable SET data = :data WHERE 1 = 1')
+                ->willReturn($mockStatement);      
+
+        $this->expectException(ExecutionErrorException::class);
+        $this->expectExceptionMessage('test');
+        $this->_object->execute($mockPdo);
+    }
+    
+    public function testExecuteEmptyDataset(){
+        
+        $mockWhere = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
+        $mockWhere->expects($this->any())
+                ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
+        $this->_object->setWhere($mockWhere)->setData([]);
+        
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
+
+        $this->expectException(\DSchoenbauer\Sql\Exception\EmptyDatasetException::class);
+        $this->_object->execute($mockPdo);
     }
 }

@@ -27,6 +27,7 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 
@@ -39,7 +40,7 @@ class Update implements CommandInterface {
 
     private $_table;
     private $_data = [];
-    
+
     use WhereTrait;
 
     public function __construct($table, array $data, WhereStatementInterface $where = null) {
@@ -47,8 +48,14 @@ class Update implements CommandInterface {
     }
 
     public function execute(PDO $pdo) {
-        $s = $pdo->prepare($this->getSql());
-        return $s->execute($this->getCombinedData());
+        try {
+            $s = $pdo->prepare($this->getSql());
+            return $s->execute($this->getCombinedData());
+        } catch (EmptyDatasetException $exc) {
+            throw $exc;
+        } catch (\Exception $exc) {
+            throw new ExecutionErrorException($exc->getMessage());
+        }
     }
 
     public function getSql() {

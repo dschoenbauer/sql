@@ -26,8 +26,10 @@
 
 namespace DSchoenbauer\Sql\Command;
 
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use DSchoenbauer\Tests\Sql\MockPdo;
+use Exception;
 use PDO;
 use PDOStatement;
 use PHPUnit_Framework_TestCase;
@@ -153,6 +155,17 @@ class SelectTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals($data, $this->_object
                         ->setFetchFlat(false)
                         ->execute($this->getMockPDO(false, null, $data)));
+    }
+
+    public function testExecuteFail() {
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo->expects($this->once())
+                ->method('prepare')
+                ->willThrowException(new Exception('test'));
+        $data = ['id' => 1, 'name' => 'Bob'];
+        $this->expectException(ExecutionErrorException::class);
+        $this->expectExceptionMessage('test');
+        $this->_object->execute($mockPdo);
     }
 
     public function getWhere(array $whereData = [], $statement = null) {

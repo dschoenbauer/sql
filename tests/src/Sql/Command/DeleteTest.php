@@ -108,5 +108,22 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($this->_object->execute($mockPdo));
     }
+    public function testExecuteNoFail() {
+        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement->expects($this->once())
+                ->method('execute')
+                ->with()
+                ->willThrowException(new \Exception('test'));
+
+
+        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo->expects($this->once())
+                ->method('prepare')
+                ->with('DELETE FROM someTable')
+                ->willReturn($mockStatement);
+        $this->expectException(\DSchoenbauer\Sql\Exception\ExecutionErrorException::class);
+        $this->expectExceptionMessage('test');
+        $this->_object->execute($mockPdo);
+    }
 
 }

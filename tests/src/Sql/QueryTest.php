@@ -30,7 +30,7 @@ use DSchoenbauer\Sql\Command\Create;
 use DSchoenbauer\Sql\Command\Delete;
 use DSchoenbauer\Sql\Command\Select;
 use DSchoenbauer\Sql\Command\Update;
-use DSchoenbauer\Sql\Sql;
+use DSchoenbauer\Sql\Query;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -38,16 +38,16 @@ use PHPUnit_Framework_TestCase;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class SqlTest extends PHPUnit_Framework_TestCase {
+class QueryTest extends PHPUnit_Framework_TestCase {
 
     protected $_object;
 
     protected function setUp() {
-        $this->_object = new Sql();
+        $this->_object = new Query();
     }
 
     public function testWith() {
-        $this->assertInstanceOf(Sql::class, Sql::with());
+        $this->assertInstanceOf(Query::class, Query::with());
     }
 
     public function testCreate() {
