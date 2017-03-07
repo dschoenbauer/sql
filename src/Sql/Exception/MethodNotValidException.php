@@ -34,5 +34,5 @@ use DSchoenbauer\Exception\Http\ServerError\InternalServerErrorException;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class MethodNotValidException extends InternalServerErrorException implements SqlExceptionInterface {
-    //put your code here
+
 }

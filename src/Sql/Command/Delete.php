@@ -26,6 +26,7 @@
 
 namespace DSchoenbauer\Sql\Command;
 
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Exception\MethodNotValidException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
@@ -46,11 +47,15 @@ class Delete implements CommandInterface {
     }
 
     public function execute(PDO $pdo) {
-        $s = $pdo->prepare($this->getSql());
-        if (count($this->getWhereData()) > 0) {
-            return $s->execute($this->getWhereData());
+        try {
+            $s = $pdo->prepare($this->getSql());
+            if (count($this->getWhereData()) > 0) {
+                return $s->execute($this->getWhereData());
+            }
+            return $s->execute();
+        } catch (\Exception $exc) {
+            throw new ExecutionErrorException($exc->getMessage());
         }
-        return $s->execute();
     }
 
     public function getData() {

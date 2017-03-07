@@ -26,8 +26,10 @@
 
 namespace DSchoenbauer\Sql\Command;
 
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
+use PDOStatement;
 
 /**
  * @author David Schoenbauer <dschoenbauer@gmail.com>
@@ -48,28 +50,32 @@ class Select implements CommandInterface {
     }
 
     public function execute(PDO $pdo) {
-        $stmt = $pdo->prepare($this->getSql());
-        $this->statementExecute($stmt, $this->getWhereData());
-        $data = $this->fetchData($stmt, $this->getFetchFlat(), $this->getFetchStyle());
-        $this->setData($data ?: $this->getDefaultValue());
-        return $this->getData();
+        try {
+            $stmt = $pdo->prepare($this->getSql());
+            $this->statementExecute($stmt, $this->getWhereData());
+            $data = $this->fetchData($stmt, $this->getFetchFlat(), $this->getFetchStyle());
+            $this->setData($data ?: $this->getDefaultValue());
+            return $this->getData();
+        } catch (\Exception $exc) {
+            throw new ExecutionErrorException($exc->getMessage());
+        }
     }
 
-    protected function statementExecute(\PDOStatement $stmt, array $whereData) {
+    protected function statementExecute(PDOStatement $stmt, array $whereData) {
         if (count($whereData) > 0) {
             return $stmt->execute($whereData);
         }
         return $stmt->execute();
     }
 
-    protected function fetchData(\PDOStatement $stmt, $fetchFlat, $fetchStyle) {
+    protected function fetchData(PDOStatement $stmt, $fetchFlat, $fetchStyle) {
         if ($fetchFlat) {
             return $stmt->fetch($fetchStyle);
         }
         return $stmt->fetchAll($fetchStyle);
     }
 
-    public function getSql() {
+    public function getSql() {               
         $sqlTemplate = "SELECT %s FROM %s %s";
         $fieldsCompiled = implode(',', $this->getFields());
         return trim(sprintf($sqlTemplate, $fieldsCompiled, $this->getTable(), $this->getWhereStatement()));
