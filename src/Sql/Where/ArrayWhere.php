@@ -36,7 +36,7 @@ class ArrayWhere implements WhereStatementInterface {
     private $_data = [];
     private $_whereData = [];
     private $_fieldOperator = 'and';
-    private $_rowOperator = 'and';
+    private $_rowOperator = 'or';
     private $_useParanthesis;
     private $_saltSeed = 1;
 
