@@ -49,8 +49,8 @@ class Update implements CommandInterface {
 
     public function execute(PDO $pdo) {
         try {
-            $s = $pdo->prepare($this->getSql());
-            return $s->execute($this->getCombinedData());
+            $stmt = $pdo->prepare($this->getSql());
+            return $stmt->execute($this->getCombinedData());
         } catch (EmptyDatasetException $exc) {
             throw $exc;
         } catch (\Exception $exc) {
