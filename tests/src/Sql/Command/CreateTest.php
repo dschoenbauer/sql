@@ -58,7 +58,6 @@ class CreateTest extends PHPUnit_Framework_TestCase {
     
     public function testGetSqlEmptyData(){
         $this->expectException(EmptyDatasetException::class);
-        $sql = "INSERT INTO someTable (data) VALUES (:data)";
         $this->_object->getSql();
     }
     
