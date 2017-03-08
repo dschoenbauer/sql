@@ -75,7 +75,7 @@ class Select implements CommandInterface {
         return $stmt->fetchAll($fetchStyle);
     }
 
-    public function getSql() {               
+    public function getSql() {
         $sqlTemplate = "SELECT %s FROM %s %s";
         $fieldsCompiled = implode(',', $this->getFields());
         return trim(sprintf($sqlTemplate, $fieldsCompiled, $this->getTable(), $this->getWhereStatement()));

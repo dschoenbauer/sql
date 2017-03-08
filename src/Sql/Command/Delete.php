@@ -41,18 +41,18 @@ class Delete implements CommandInterface {
     private $_table;
 
     use WhereTrait;
-    
+
     public function __construct($table, WhereStatementInterface $where = null) {
         $this->setTable($table)->setWhere($where);
     }
 
     public function execute(PDO $pdo) {
         try {
-            $s = $pdo->prepare($this->getSql());
+            $stmt = $pdo->prepare($this->getSql());
             if (count($this->getWhereData()) > 0) {
-                return $s->execute($this->getWhereData());
+                return $stmt->execute($this->getWhereData());
             }
-            return $s->execute();
+            return $stmt->execute();
         } catch (\Exception $exc) {
             throw new ExecutionErrorException($exc->getMessage());
         }
