@@ -33,6 +33,6 @@ use DSchoenbauer\Exception\Http\ClientError\BadRequestException;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class EmptyDatasetException extends BadRequestException implements SqlExceptionInterface{
+class EmptyDatasetException extends BadRequestException implements SqlExceptionInterface {
     
 }

@@ -39,8 +39,8 @@ use PDO;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class Query {
-    
-    public static function with(){
+
+    public static function with() {
         return new static();
     }
 
@@ -67,7 +67,8 @@ class Query {
      * @param WhereStatementInterface $where
      * @return Delete
      */
-    public function delete($table, WhereStatementInterface $where = null){
+    public function delete($table, WhereStatementInterface $where = null) {
         return new Delete($table, $where);
     }
+
 }
