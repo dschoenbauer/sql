@@ -32,5 +32,6 @@ use DSchoenbauer\Exception\ExceptionInterface;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-interface SqlExceptionInterface extends ExceptionInterface{
+interface SqlExceptionInterface extends ExceptionInterface {
+    
 }

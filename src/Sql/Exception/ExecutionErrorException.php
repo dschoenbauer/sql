@@ -33,6 +33,6 @@ use DSchoenbauer\Exception\Http\ClientError\BadRequestException;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class ExecutionErrorException extends BadRequestException implements SqlExceptionInterface{
-
+class ExecutionErrorException extends BadRequestException implements SqlExceptionInterface {
+    
 }

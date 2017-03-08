@@ -41,7 +41,7 @@ class Delete implements CommandInterface {
     private $_table;
 
     use WhereTrait;
-    
+
     public function __construct($table, WhereStatementInterface $where = null) {
         $this->setTable($table)->setWhere($where);
     }

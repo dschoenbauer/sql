@@ -68,7 +68,7 @@ class ArrayWhere implements WhereStatementInterface {
         $suffix = $keyPrefix = ($this->getUseParanthesis() ? ")" : "");
 
         return $prefix . implode($keyPrefix . ' ' . $this->getFieldOperator() . ' ' . $keySuffix, array_map(function($key, $value) use ($keySalt) {
-                            $saltedKey = $key . "-" .$keySalt;
+                            $saltedKey = $key . "-" . $keySalt;
                             $this->addData($saltedKey, $value);
                             return sprintf('%s = :%s', $key, $saltedKey);
                         }, array_keys($assocArray), array_values($assocArray))) . $suffix;

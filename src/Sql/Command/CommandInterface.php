@@ -30,9 +30,10 @@ namespace DSchoenbauer\Sql\Command;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 interface CommandInterface {
-    
+
     public function getSql();
+
     public function getData();
+
     public function execute(\PDO $pdo);
-    
 }
