@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class DSchoenbauer\Sql\Query</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-DSchoenbauer.html">
+						DSchoenbauer<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-DSchoenbauer.Sql.html">
+						Sql<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-DSchoenbauer.Sql.Command.html">
+						Command					</a>
+
+						</li>
+				<li>
+					<a href="namespace-DSchoenbauer.Sql.Exception.html">
+						Exception					</a>
+
+						</li>
+				<li>
+					<a href="namespace-DSchoenbauer.Sql.Where.html">
+						Where					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-DSchoenbauer.Sql.Query.html">Query</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-DSchoenbauer.Sql.html" title="Summary of DSchoenbauer\Sql"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Query</h1>
+
+
+	<div class="description">
+	<p>a facade object that allows easier implementation of the SQL library</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-DSchoenbauer.html">DSchoenbauer</a>\<a href="namespace-DSchoenbauer.Sql.html">Sql</a><br>
+		
+
+				<b>Author:</b>
+				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Query.html#36-102" title="Go to source code">Sql/Query.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="with" id="_with">
+
+		<td class="attributes"><code>
+			 public static
+
+			static
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_with">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#44-51" title="Go to source code">with</a>( )</code>
+
+		<div class="description short">
+			<p>provides a means for functional access to the objects of this library</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>provides a means for functional access to the objects of this library</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					static<br>a new instance of this object
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="create" id="_create">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-DSchoenbauer.Sql.Command.Create.html">DSchoenbauer\Sql\Command\Create</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_create">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#53-62" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>adds new data into a PDO connected resource</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>adds new data into a PDO connected resource</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>table with which you wish to append to</dd>
+					<dt><var>$data</var></dt>
+					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Command.Create.html">DSchoenbauer\Sql\Command\Create</a></code><br>a create object that manages the addition of new records
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="select" id="_select">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-DSchoenbauer.Sql.Command.Select.html">DSchoenbauer\Sql\Command\Select</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_select">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#64-77" title="Go to source code">select</a>( <span>string <var>$table</var></span>, <span>array <var>$fields</var> = []</span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$fetchStyle</var> = DSchoenbauer\Sql\PDO::FETCH_ASSOC</span>, <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$defaultValue</var> = []</span> )</code>
+
+		<div class="description short">
+			<p>retrieves data from a PDO connected resource</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>retrieves data from a PDO connected resource</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>name of the table that houses the data</dd>
+					<dt><var>$fields</var></dt>
+					<dd>optional default value: empty array - defines which fields are returned if no fields defined a star will be used</dd>
+					<dt><var>$where</var></dt>
+					<dd>optional default value: null - object used to limit the returned results</dd>
+					<dt><var>$fetchStyle</var></dt>
+					<dd>optional default value: PDO::FETCH_ASSOC - sets how the PDO statement will return records</dd>
+					<dt><var>$fetchFlat</var></dt>
+					<dd>optional default value: false - true will return one record, false will return all records</dd>
+					<dt><var>$defaultValue</var></dt>
+					<dd>optional default value: empty array - value to be returned on query failure</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Command.Select.html">DSchoenbauer\Sql\Command\Select</a></code><br>the select object responsible for retrieving records
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-DSchoenbauer.Sql.Command.Update.html">DSchoenbauer\Sql\Command\Update</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#79-89" title="Go to source code">update</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>changes values of existing data in a PDO connected resource</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>changes values of existing data in a PDO connected resource</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>table with which you wish to update</dd>
+					<dt><var>$data</var></dt>
+					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be updated into the table</dd>
+					<dt><var>$where</var></dt>
+					<dd>an object that is designed to return a where statement to limit the data that is affected by the update</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Command.Update.html">DSchoenbauer\Sql\Command\Update</a></code><br>the update object responsible to handling the update of persistent records.
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-DSchoenbauer.Sql.Command.Delete.html">DSchoenbauer\Sql\Command\Delete</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#91-100" title="Go to source code">delete</a>( <span>string <var>$table</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>removes records from a PDO connected resource</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>removes records from a PDO connected resource</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>table with which you wish to remove records from</dd>
+					<dt><var>$where</var></dt>
+					<dd>an object that is designed to return a where statement to limit the data that is affected by the delete</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Command.Delete.html">DSchoenbauer\Sql\Command\Delete</a></code><br>the delete object responsible for handling removal of persistent records
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

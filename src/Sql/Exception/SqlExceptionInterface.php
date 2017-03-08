@@ -29,8 +29,9 @@ namespace DSchoenbauer\Sql\Exception;
 use DSchoenbauer\Exception\ExceptionInterface;
 
 /**
- *
+ * a common interface for all exceptions of this library
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @version v1.0.0
  */
 interface SqlExceptionInterface extends ExceptionInterface {
     

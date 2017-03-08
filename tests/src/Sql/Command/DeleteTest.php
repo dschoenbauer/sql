@@ -26,7 +26,10 @@
 
 namespace DSchoenbauer\Sql\Command;
 
-use DSchoenbauer\Sql\Exception\MethodNotValidException;
+use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Where\WhereStatementInterface;
+use DSchoenbauer\Tests\Sql\MockPdo;
+use PDOStatement;
 use PHPUnit_Framework_TestCase;
 
 /**
@@ -51,8 +54,14 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testGetData() {
-        $this->expectException(MethodNotValidException::class);
-        $this->_object->getData();
+        $this->assertEquals([], $this->_object->getData());
+    }
+
+    public function testGetDataWithWhere() {
+        $mockWhere = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
+        $mockWhere->expects($this->any())
+                ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
+        $this->assertEquals(['field' => 'where', 'where' => 1], $this->_object->setWhere($mockWhere)->getData());
     }
 
     public function testGetSql() {
@@ -60,7 +69,7 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testGetSqlWithWhere() {
-        $mock = $this->getMockBuilder(\DSchoenbauer\Sql\Where\WhereStatementInterface::class)->getMock();
+        $mock = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
         $mock->expects($this->once())
                 ->method('getStatement')
                 ->willReturn('1 = 1');
@@ -68,7 +77,7 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testExecuteWithWhere() {
-        $mockWhere = $this->getMockBuilder(\DSchoenbauer\Sql\Where\WhereStatementInterface::class)->getMock();
+        $mockWhere = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
         $mockWhere->expects($this->any())
                 ->method('getData')->willReturn(['field' => 'where', 'where' => 1]);
         $mockWhere->expects($this->once())
@@ -76,14 +85,14 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
 
         $this->_object->setWhere($mockWhere);
 
-        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
                 ->with($this->_object->getWhereData())
                 ->willReturn(true);
 
 
-        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
                 ->method('prepare')
                 ->with('DELETE FROM someTable WHERE 1 = 1')
@@ -93,14 +102,14 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testExecuteNoWhere() {
-        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
                 ->with()
                 ->willReturn(true);
 
 
-        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
                 ->method('prepare')
                 ->with('DELETE FROM someTable')
@@ -108,20 +117,21 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
 
         $this->assertTrue($this->_object->execute($mockPdo));
     }
+
     public function testExecuteNoFail() {
-        $mockStatement = $this->getMockBuilder(\PDOStatement::class)->getMock();
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
                 ->with()
                 ->willThrowException(new \Exception('test'));
 
 
-        $mockPdo = $this->getMockBuilder(\DSchoenbauer\Tests\Sql\MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
                 ->method('prepare')
                 ->with('DELETE FROM someTable')
                 ->willReturn($mockStatement);
-        $this->expectException(\DSchoenbauer\Sql\Exception\ExecutionErrorException::class);
+        $this->expectException(ExecutionErrorException::class);
         $this->expectExceptionMessage('test');
         $this->_object->execute($mockPdo);
     }

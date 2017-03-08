@@ -30,8 +30,8 @@ use DSchoenbauer\Exception\Http\ClientError\BadRequestException;
 
 /**
  * A volume of data is required to complete given operation but no data is provided
- *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @since v1.0.0
  */
 class EmptyDatasetException extends BadRequestException implements SqlExceptionInterface {
     

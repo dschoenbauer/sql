@@ -29,7 +29,7 @@ namespace DSchoenbauer\Sql\Command;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 
 /**
- * Description of WhereTrait
+ * Common functionality all items using a where statement use.
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
@@ -37,6 +37,11 @@ trait WhereTrait {
 
     private $_where;
 
+    /**
+     * Adds the prefix WHERE to what the where object has provided as a where statement
+     * @return string returns a full WHERE statement will return null if not statement provided
+     * @since v1.0.0
+     */
     public function getWhereStatement() {
         if ($this->hasWhere()) {
             return sprintf("WHERE %s", $this->getWhere()->getStatement());
@@ -44,22 +49,41 @@ trait WhereTrait {
         return null;
     }
 
+    /**
+     * checks to see if a where statement has been provided
+     * @return bool checks to see if a where statement has been set
+     * @since v1.0.0
+     */
     protected function hasWhere() {
         return $this->_where instanceof WhereStatementInterface;
     }
 
+
     /**
-     * @return WhereStatementInterface
+     * returns where statement given to object
+     * @return WhereStatementInterface provides stored where statement object
+     * @since v1.0.0
      */
     public function getWhere() {
         return $this->_where;
     }
 
+    /**
+     * adds a where statement to a given statement
+     * @param WhereStatementInterface $where where statement to be used added
+     * @return $this bubbling 
+     * @since v1.0.0
+     */
     public function setWhere(WhereStatementInterface $where = null) {
         $this->_where = $where;
         return $this;
     }
 
+    /**
+     * returns an array that can be used in a prepared statement
+     * @return array an array of data specific to the data of the where statement
+     * @since v1.0.0
+     */
     public function getWhereData() {
         $whereData = [];
         if ($this->hasWhere()) {
