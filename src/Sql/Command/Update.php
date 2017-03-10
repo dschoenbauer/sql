@@ -124,7 +124,7 @@ class Update implements CommandInterface
     /**
      * defines a table with which you wish to update
      * @param string $table a table with which you wish to update
-     * @return $this for method chaining
+     * @return Update for method chaining
      * @since v1.0.0
      */
     public function setTable($table)
@@ -133,6 +133,11 @@ class Update implements CommandInterface
         return $this;
     }
 
+    /**
+     * Returns a combination of data from Where statement and from this object
+     * @return array
+     * @since v1.0.0
+     */
     public function getCombinedData()
     {
         $whereData = $this->getWhereData();
@@ -156,7 +161,7 @@ class Update implements CommandInterface
      * of the array are used to generate the field list.
      * @param array $data a single level associative array containing keys that
      * represent the fields and values that represent values to be updated into the table
-     * @return $this for method chaining
+     * @return Update for method chaining
      * @since v1.0.0
      */
     public function setData($data)

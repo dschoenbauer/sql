@@ -108,7 +108,7 @@ class Delete implements CommandInterface
     /**
      * defines a table with which you wish to remove from
      * @param string $table table with which you wish to remove from
-     * @return $this for method chaining
+     * @return Delete for method chaining
      * @since v1.0.0
      */
     public function setTable($table)

@@ -124,7 +124,7 @@ class Create implements CommandInterface
     /**
      * defines a table with which you wish to append to
      * @param string $table a table with which you wish to append to
-     * @return $this for method chaining
+     * @return Create for method chaining
      * @since v1.0.0
      */
     public function setTable($table)
@@ -139,7 +139,7 @@ class Create implements CommandInterface
      * @param array $data a single level associative array containing keys that
      * represent the fields and values that represent new values to be added
      * into the table
-     * @return $this for method chaining
+     * @return Create for method chaining
      * @since v1.0.0
      */
     public function setData(array $data)

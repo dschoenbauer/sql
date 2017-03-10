@@ -62,10 +62,14 @@ class Select implements CommandInterface
      * @since v1.0.0
      */
     public function __construct(
-    $table, $fields = [], WhereStatementInterface $where = null,
-    $fetchStyle = \PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = []
-    )
-    {
+        $table,
+        $fields = [],
+        WhereStatementInterface $where = null,
+        $fetchStyle = \PDO::FETCH_ASSOC,
+        $fetchFlat = false,
+        $defaultValue = []
+    ) {
+    
 
         $this->setTable($table)
             ->setFields($fields)
@@ -80,6 +84,7 @@ class Select implements CommandInterface
      * @param PDO $pdo a PDO  connection object
      * @return mixed with return the result set as defined by fetchStyle
      * @throws ExecutionErrorException on SQL error with the message of the exception
+     * @since v1.0.0
      */
     public function execute(PDO $pdo)
     {
@@ -87,7 +92,9 @@ class Select implements CommandInterface
             $stmt = $pdo->prepare($this->getSql());
             $this->statementExecute($stmt, $this->getWhereData());
             $data = $this->fetchData(
-                $stmt, $this->getFetchFlat(), $this->getFetchStyle()
+                $stmt,
+                $this->getFetchFlat(),
+                $this->getFetchStyle()
             );
             $this->setData($data ?: $this->getDefaultValue());
             return $this->getData();
@@ -138,15 +145,17 @@ class Select implements CommandInterface
         $sqlTemplate = "SELECT %s FROM %s %s";
         $fieldsCompiled = implode(',', $this->getFields());
         return trim(sprintf(
-                $sqlTemplate, $fieldsCompiled, $this->getTable(),
-                $this->getWhereStatement()
+            $sqlTemplate,
+            $fieldsCompiled,
+            $this->getTable(),
+            $this->getWhereStatement()
         ));
     }
 
     /**
      * acts as a cache to house ran queries
      * @param array $data data to be stored
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setData(array $data)
@@ -178,7 +187,7 @@ class Select implements CommandInterface
     /**
      * defines a table with which you wish to append to
      * @param string $table a table with which you wish to append to
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setTable($table)
@@ -200,7 +209,7 @@ class Select implements CommandInterface
     /**
      * Defines the fields to be returned, if no fields defined all fields are returned
      * @param array $fields
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setFields(array $fields = null)
@@ -222,7 +231,7 @@ class Select implements CommandInterface
     /**
      * used to define how data is returned
      * @param int $fetchStyle one of the PDO::FETCH_*
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setFetchStyle($fetchStyle)
@@ -245,7 +254,7 @@ class Select implements CommandInterface
      * sets if one or many records will be returned.
      * @param boolean $fetchFlat optional default value: false - true will
      * return one record, false will return all records
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setFetchFlat($fetchFlat = true)
@@ -268,7 +277,7 @@ class Select implements CommandInterface
      * Value to be returned if no data is found or query fails
      * @param mixed $defaultValue optional default value: empty array - value to
      * be returned on query failure
-     * @return $this for method chaining
+     * @return Select for method chaining
      * @since v1.0.0
      */
     public function setDefaultValue($defaultValue = [])
