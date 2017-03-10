@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,16 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Exception;
 
 use DSchoenbauer\Exception\Http\ServerError\InternalServerErrorException;
 
 /**
- * Description of MethodNotValidException
- *
+ * Called when method is not valid for a given object
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @version v1.0.0
  */
-class MethodNotValidException extends InternalServerErrorException implements SqlExceptionInterface {
+class MethodNotValidException extends InternalServerErrorException implements SqlExceptionInterface
+{
     
 }

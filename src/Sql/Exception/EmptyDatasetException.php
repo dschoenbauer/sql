@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,16 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Exception;
 
 use DSchoenbauer\Exception\Http\ClientError\BadRequestException;
 
 /**
  * A volume of data is required to complete given operation but no data is provided
- *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @since v1.0.0
  */
-class EmptyDatasetException extends BadRequestException implements SqlExceptionInterface {
+class EmptyDatasetException extends BadRequestException implements SqlExceptionInterface
+{
     
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,16 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Exception;
 
 use DSchoenbauer\Exception\Http\ClientError\BadRequestException;
 
 /**
- * Thrown when an error occurs during the execution of a query
- *
+ * Thrown when an error occurs during the execution of a query, message MUST be
+ * populated for a better context of the error
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @since v1.0.0
  */
-class ExecutionErrorException extends BadRequestException implements SqlExceptionInterface {
+class ExecutionErrorException extends BadRequestException implements SqlExceptionInterface
+{
     
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,16 +22,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Where;
 
 /**
- *
+ * Common where interface to ensure all where objects work with the library
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @since v1.0.0
  */
-interface WhereStatementInterface {
+interface WhereStatementInterface
+{
 
+    /**
+     * returns just the expression of a PDO prepared where statement
+     *
+     * i.e. id = :id
+     */
     public function getStatement();
 
+    /**
+     * Data provided to fulfill the requirements of the getStatement function
+     */
     public function getData();
 }

@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,17 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 /**
+ * A common interface used for SQL commands
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-interface CommandInterface {
+interface CommandInterface
+{
 
+    /**
+     * A SQL statement that has been formatted per the PDO prepared statement syntax
+     */
     public function getSql();
 
+    /**
+     * a single level array that fulfills the requirements of the SQL statement
+     */
     public function getData();
 
+    /**
+     * this will take the sql and the data and execute them in a manner that makes sense for the command
+     * @param \PDO $pdo a PDO connection to a given resource
+     * @return mixed can return what makes most sense for the command
+     */
     public function execute(\PDO $pdo);
 }
