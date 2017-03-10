@@ -108,6 +108,9 @@
 	<h1>Class Select</h1>
 
 
+	<div class="description">
+	<p>retrieves data from a PDO connected resource</p>
+	</div>
 
 	<dl class="tree">
 		<dd style="padding-left:0px">
@@ -136,7 +139,7 @@
 
 				<b>Author:</b>
 				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
-			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Select.html#32-209" title="Go to source code">Sql/Command/Select.php</a>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Select.html#32-279" title="Go to source code">Sql/Command/Select.php</a>
 		<br>
 	</div>
 
@@ -149,26 +152,54 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			<code><a href="class-DSchoenbauer.Sql.Command.Select.html">DSchoenbauer\Sql\Command\Select</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#47-62" title="Go to source code">__construct</a>( <span> <var>$table</var></span>, <span> <var>$fields</var> = []</span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span> <var>$fetchStyle</var> = DSchoenbauer\Sql\Command\PDO::FETCH_ASSOC</span>, <span> <var>$fetchFlat</var> = <span class="php-keyword1">false</span></span>, <span> <var>$defaultValue</var> = [] </span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#48-76" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span>array <var>$fields</var> = []</span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$fetchStyle</var> = DSchoenbauer\Sql\Command\PDO::FETCH_ASSOC</span>, <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$defaultValue</var> = [] </span> )</code>
 
 		<div class="description short">
-			
+			<p>retrieves data from a PDO connected resource</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>retrieves data from a PDO connected resource</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>name of the table that houses the data</dd>
+					<dt><var>$fields</var></dt>
+					<dd><p>optional default value: empty array - defines which
+fields are returned if no fields defined a star will be used</p></dd>
+					<dt><var>$where</var></dt>
+					<dd><p>optional default value: null -
+object used to limit the returned results</p></dd>
+					<dt><var>$fetchStyle</var></dt>
+					<dd><p>optional default value: PDO::FETCH_ASSOC -
+sets how the PDO statement will return records</p></dd>
+					<dt><var>$fetchFlat</var></dt>
+					<dd><p>optional default value: false - true will
+return one record, false will return all records</p></dd>
+					<dt><var>$defaultValue</var></dt>
+					<dd><p>optional default value: empty array -
+value to be returned on query failure</p></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Command.Select.html">DSchoenbauer\Sql\Command\Select</a></code><br>the select object responsible for retrieving records
+				</div>
 
 
-
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -186,27 +217,31 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#64-75" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#78-97" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
 
 		<div class="description short">
-			<p>this will take the sql and the data and execute them in a manner that makes sense for the command</p>
+			<p>Runs a query and returns the result of the SQL</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>this will take the sql and the data and execute them in a manner that makes sense for the command</p>
+			<p>Runs a query and returns the result of the SQL</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pdo</var></dt>
-					<dd>a PDO connection to a given resource</dd>
+					<dd>a PDO  connection object</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					mixed<br>can return what makes most sense for the command
+					mixed<br>with return the result set as defined by fetchStyle
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Exception.ExecutionErrorException.html">DSchoenbauer\Sql\Exception\ExecutionErrorException</a></code><br>on SQL error with the message of the exception
+				</div>
 
 
 
@@ -220,26 +255,41 @@
 		<td class="attributes"><code>
 			 protected 
 
-			
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_statementExecute">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#77-83" title="Go to source code">statementExecute</a>( <span>PDOStatement <var>$stmt</var></span>, <span>array <var>$whereData</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#99-112" title="Go to source code">statementExecute</a>( <span>PDOStatement <var>$stmt</var></span>, <span>array <var>$whereData</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>Runs the sql statement inserting the query's data</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>Runs the sql statement inserting the query's data</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stmt</var></dt>
+					<dd>PDO statement of a prepared SQL statement</dd>
+					<dt><var>$whereData</var></dt>
+					<dd>data to be used to fill out a where statement</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>true query succeeds, false there was an error executing the query
+				</div>
 
 
-
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -250,26 +300,44 @@
 		<td class="attributes"><code>
 			 protected 
 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetchData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#85-91" title="Go to source code">fetchData</a>( <span>PDOStatement <var>$stmt</var></span>, <span> <var>$fetchFlat</var></span>, <span> <var>$fetchStyle</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#114-129" title="Go to source code">fetchData</a>( <span>PDOStatement <var>$stmt</var></span>, <span>boolean <var>$fetchFlat</var></span>, <span>integer <var>$fetchStyle</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>Fetches the data from PDO resource</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>Fetches the data from PDO resource</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$stmt</var></dt>
+					<dd>PDO statement of a prepared SQL statement</dd>
+					<dt><var>$fetchFlat</var></dt>
+					<dd>true returns one record, false returns all records</dd>
+					<dt><var>$fetchStyle</var></dt>
+					<dd><p>a \PDO::FETCH_* variable defining the format of
+the returned object</p></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>returns the results of the query
+				</div>
 
 
-
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -280,26 +348,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSql">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#93-103" title="Go to source code">getSql</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#131-144" title="Go to source code">getSql</a>( )</code>
 
 		<div class="description short">
-			<p>A SQL statement that has been formatted per the PDO prepared statement syntax</p>
+			<p>returns a PDO SQL string that has parameter syntax</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>A SQL statement that has been formatted per the PDO prepared statement syntax</p>
+			<p>returns a PDO SQL string that has parameter syntax</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 				<h4>Implementation of</h4>
@@ -319,20 +395,20 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#105-114" title="Go to source code">setData</a>( <span>array <var>$data</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#146-156" title="Go to source code">setData</a>( <span>array <var>$data</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>acts as a cache to house ran queries</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>acts as a cache to house ran queries</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$data</var></dt>
-					<dd></dd>
+					<dd>data to be stored</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -341,6 +417,10 @@
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -351,26 +431,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			mixed
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#116-119" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#158-166" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
-			<p>a single level array that fulfills the requirements of the SQL statement</p>
+			<p>Acts as a cache array that holds the data returned from a query</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>a single level array that fulfills the requirements of the SQL statement</p>
+			<p>Acts as a cache array that holds the data returned from a query</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					mixed
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 				<h4>Implementation of</h4>
@@ -383,26 +471,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#121-124" title="Go to source code">getTable</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#168-176" title="Go to source code">getTable</a>( )</code>
 
 		<div class="description short">
-			
+			<p>retrieves the table with which you wish to select from</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>retrieves the table with which you wish to select from</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>table with which you wish to select from
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -420,20 +516,20 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#126-135" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#178-188" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>defines a table with which you wish to append to</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>defines a table with which you wish to append to</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$table</var></dt>
-					<dd></dd>
+					<dd>a table with which you wish to append to</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -442,6 +538,10 @@
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -452,26 +552,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFields">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#137-140" title="Go to source code">getFields</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#190-198" title="Go to source code">getFields</a>( )</code>
 
 		<div class="description short">
-			
+			<p>Returns the fields to be returned, if no fields defined all fields are returned</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>Returns the fields to be returned, if no fields defined all fields are returned</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -489,7 +597,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFields">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#142-151" title="Go to source code">setFields</a>( <span>array <var>$fields</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#200-210" title="Go to source code">setFields</a>( <span>array <var>$fields</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Defines the fields to be returned, if no fields defined all fields are returned</p>
@@ -511,6 +619,10 @@
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -521,26 +633,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			integer
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFetchStyle">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#153-156" title="Go to source code">getFetchStyle</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#212-220" title="Go to source code">getFetchStyle</a>( )</code>
 
 		<div class="description short">
-			
+			<p>defines how data is returned</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>defines how data is returned</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					integer<br>$fetchStyle one of the PDO::FETCH_*
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -558,7 +678,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFetchStyle">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#158-167" title="Go to source code">setFetchStyle</a>( <span>integer <var>$fetchStyle</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#222-232" title="Go to source code">setFetchStyle</a>( <span>integer <var>$fetchStyle</var></span> )</code>
 
 		<div class="description short">
 			<p>used to define how data is returned</p>
@@ -580,6 +700,10 @@
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -597,7 +721,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getFetchFlat">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#169-176" title="Go to source code">getFetchFlat</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#234-242" title="Go to source code">getFetchFlat</a>( )</code>
 
 		<div class="description short">
 			<p>sets if one or many records will be returned.</p>
@@ -614,6 +738,10 @@
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -631,7 +759,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setFetchFlat">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#178-188" title="Go to source code">setFetchFlat</a>( <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">true</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#244-255" title="Go to source code">setFetchFlat</a>( <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">true</span></span> )</code>
 
 		<div class="description short">
 			<p>sets if one or many records will be returned.</p>
@@ -654,6 +782,10 @@ return one record, false will return all records</p></dd>
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -671,7 +803,7 @@ return one record, false will return all records</p></dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getDefaultValue">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#190-197" title="Go to source code">getDefaultValue</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#257-265" title="Go to source code">getDefaultValue</a>( )</code>
 
 		<div class="description short">
 			<p>Value to be returned if no data is found or query fails</p>
@@ -688,6 +820,10 @@ return one record, false will return all records</p></dd>
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -705,7 +841,7 @@ return one record, false will return all records</p></dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setDefaultValue">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#199-208" title="Go to source code">setDefaultValue</a>( <span>mixed <var>$defaultValue</var> = []</span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Select.html#267-278" title="Go to source code">setDefaultValue</a>( <span>mixed <var>$defaultValue</var> = []</span> )</code>
 
 		<div class="description short">
 			<p>Value to be returned if no data is found or query fails</p>
@@ -718,7 +854,8 @@ return one record, false will return all records</p></dd>
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$defaultValue</var></dt>
-					<dd>optional default value: empty array - value to be returned on query failure</dd>
+					<dd><p>optional default value: empty array - value to
+be returned on query failure</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -727,6 +864,10 @@ return one record, false will return all records</p></dd>
 				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
