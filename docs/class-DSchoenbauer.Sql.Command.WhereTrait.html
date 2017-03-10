@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Trait DSchoenbauer\Sql\Command\WhereTrait</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-DSchoenbauer.html">
+						DSchoenbauer<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-DSchoenbauer.Sql.html">
+						Sql<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-DSchoenbauer.Sql.Command.html">
+						Command					</a>
+
+						</li>
+				<li>
+					<a href="namespace-DSchoenbauer.Sql.Exception.html">
+						Exception					</a>
+
+						</li>
+				<li>
+					<a href="namespace-DSchoenbauer.Sql.Where.html">
+						Where					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-DSchoenbauer.Sql.Command.Create.html">Create</a></li>
+				<li><a href="class-DSchoenbauer.Sql.Command.Delete.html">Delete</a></li>
+				<li><a href="class-DSchoenbauer.Sql.Command.Select.html">Select</a></li>
+				<li><a href="class-DSchoenbauer.Sql.Command.Update.html">Update</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-DSchoenbauer.Sql.Command.CommandInterface.html">CommandInterface</a></li>
+			</ul>
+
+			<h3>Traits</h3>
+			<ul>
+				<li class="active"><a href="class-DSchoenbauer.Sql.Command.WhereTrait.html">WhereTrait</a></li>
+			</ul>
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-DSchoenbauer.Sql.Command.html" title="Summary of DSchoenbauer\Sql\Command"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Trait WhereTrait</h1>
+
+
+	<div class="description">
+	<p>Common functionality all items using a where statement use.</p>
+	</div>
+
+
+
+
+
+
+
+	<div>
+		<h4>Direct Known Users</h4>
+			<a href="class-DSchoenbauer.Sql.Command.Delete.html">DSchoenbauer\Sql\Command\Delete</a>, 
+			<a href="class-DSchoenbauer.Sql.Command.Select.html">DSchoenbauer\Sql\Command\Select</a>, 
+			<a href="class-DSchoenbauer.Sql.Command.Update.html">DSchoenbauer\Sql\Command\Update</a>
+	</div>
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-DSchoenbauer.html">DSchoenbauer</a>\<a href="namespace-DSchoenbauer.Sql.html">Sql</a>\<a href="namespace-DSchoenbauer.Sql.Command.html">Command</a><br>
+		
+
+				<b>Author:</b>
+				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#29-97" title="Go to source code">Sql/Command/WhereTrait.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="getWhereStatement" id="_getWhereStatement">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getWhereStatement">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#39-50" title="Go to source code">getWhereStatement</a>( )</code>
+
+		<div class="description short">
+			<p>Adds the prefix WHERE to what the where object has provided as a where statement</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Adds the prefix WHERE to what the where object has provided as a where statement</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>returns a full WHERE statement will return null if not statement provided
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasWhere" id="_hasWhere">
+
+		<td class="attributes"><code>
+			 protected 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasWhere">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#52-60" title="Go to source code">hasWhere</a>( )</code>
+
+		<div class="description short">
+			<p>checks to see if a where statement has been provided</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>checks to see if a where statement has been provided</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br>checks to see if a where statement has been set
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getWhere" id="_getWhere">
+
+		<td class="attributes"><code>
+			 public 
+
+			<code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getWhere">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#62-70" title="Go to source code">getWhere</a>( )</code>
+
+		<div class="description short">
+			<p>returns where statement given to object</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>returns where statement given to object</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code><br>provides stored where statement object
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setWhere" id="_setWhere">
+
+		<td class="attributes"><code>
+			 public 
+
+			inherit
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setWhere">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#72-82" title="Go to source code">setWhere</a>( <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			<p>adds a where statement to a given statement</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>adds a where statement to a given statement</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$where</var></dt>
+					<dd>where statement to be used added</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					inherit<br>bubbling
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getWhereData" id="_getWhereData">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getWhereData">#</a>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.WhereTrait.html#84-96" title="Go to source code">getWhereData</a>( )</code>
+
+		<div class="description short">
+			<p>returns an array that can be used in a prepared statement</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>returns an array that can be used in a prepared statement</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>an array of data specific to the data of the where statement
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

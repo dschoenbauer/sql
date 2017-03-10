@@ -7,3 +7,4 @@ Object oriented approach to SQL statement generation with a focus on building re
 [![License](https://img.shields.io/packagist/l/dschoenbauer/sql.svg)](https://github.com/dschoenbauer/sql)
 [![Downloads](https://img.shields.io/packagist/dt/dschoenbauer/sql.svg)](https://packagist.org/packages/dschoenbauer/sql)
 [![Version](https://img.shields.io/packagist/v/dschoenbauer/sql.svg)](https://github.com/dschoenbauer/sql/releases)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dschoenbauer/sql/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/dschoenbauer/sql/?branch=develop)

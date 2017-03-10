@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,15 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Exception;
 
 use DSchoenbauer\Exception\ExceptionInterface;
 
 /**
- *
+ * a common interface for all exceptions of this library
  * @author David Schoenbauer <dschoenbauer@gmail.com>
+ * @version v1.0.0
  */
-interface SqlExceptionInterface extends ExceptionInterface {
+interface SqlExceptionInterface extends ExceptionInterface
+{
     
 }
