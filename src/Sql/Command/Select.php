@@ -30,6 +30,7 @@ use PDO;
 use PDOStatement;
 
 /**
+ * retrieves data from a PDO connected resource
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
 class Select implements CommandInterface
@@ -44,17 +45,50 @@ class Select implements CommandInterface
 
     use WhereTrait;
 
-    public function __construct($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = \PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = [])
+    /**
+     * retrieves data from a PDO connected resource
+     * @param string $table name of the table that houses the data
+     * @param array $fields optional default value: empty array - defines which
+     * fields are returned if no fields defined a star will be used
+     * @param WhereStatementInterface $where optional default value: null -
+     * object used to limit the returned results
+     * @param integer $fetchStyle optional default value: PDO::FETCH_ASSOC -
+     * sets how the PDO statement will return records
+     * @param boolean $fetchFlat optional default value: false - true will
+     * return one record, false will return all records
+     * @param mixed $defaultValue optional default value: empty array -
+     * value to be returned on query failure
+     * @return Select the select object responsible for retrieving records
+     * @since v1.0.0
+     */
+    public function __construct(
+    $table, $fields = [], WhereStatementInterface $where = null,
+    $fetchStyle = \PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = []
+    )
     {
-        $this->setTable($table)->setFields($fields)->setWhere($where)->setFetchStyle($fetchStyle)->setFetchFlat($fetchFlat)->setDefaultValue($defaultValue);
+
+        $this->setTable($table)
+            ->setFields($fields)
+            ->setWhere($where)
+            ->setFetchStyle($fetchStyle)
+            ->setFetchFlat($fetchFlat)
+            ->setDefaultValue($defaultValue);
     }
 
+    /**
+     * Runs a query and returns the result of the SQL
+     * @param PDO $pdo a PDO  connection object
+     * @return mixed with return the result set as defined by fetchStyle
+     * @throws ExecutionErrorException on SQL error with the message of the exception
+     */
     public function execute(PDO $pdo)
     {
         try {
             $stmt = $pdo->prepare($this->getSql());
             $this->statementExecute($stmt, $this->getWhereData());
-            $data = $this->fetchData($stmt, $this->getFetchFlat(), $this->getFetchStyle());
+            $data = $this->fetchData(
+                $stmt, $this->getFetchFlat(), $this->getFetchStyle()
+            );
             $this->setData($data ?: $this->getDefaultValue());
             return $this->getData();
         } catch (\Exception $exc) {
@@ -62,6 +96,13 @@ class Select implements CommandInterface
         }
     }
 
+    /**
+     * Runs the sql statement inserting the query's data
+     * @param PDOStatement $stmt PDO statement of a prepared SQL statement
+     * @param array $whereData data to be used to fill out a where statement
+     * @return bool true query succeeds, false there was an error executing the query
+     * @since v1.0.0
+     */
     protected function statementExecute(PDOStatement $stmt, array $whereData)
     {
         if (count($whereData) > 0) {
@@ -70,6 +111,15 @@ class Select implements CommandInterface
         return $stmt->execute();
     }
 
+    /**
+     * Fetches the data from PDO resource
+     * @param PDOStatement $stmt PDO statement of a prepared SQL statement
+     * @param bool $fetchFlat true returns one record, false returns all records
+     * @param integer $fetchStyle a \PDO::FETCH_* variable defining the format of
+     * the returned object
+     * @return array returns the results of the query
+     * @since v1.0.0
+     */
     protected function fetchData(PDOStatement $stmt, $fetchFlat, $fetchStyle)
     {
         if ($fetchFlat) {
@@ -78,17 +128,26 @@ class Select implements CommandInterface
         return $stmt->fetchAll($fetchStyle);
     }
 
+    /**
+     * returns a PDO SQL string that has parameter syntax
+     * @return string
+     * @since v1.0.0
+     */
     public function getSql()
     {
         $sqlTemplate = "SELECT %s FROM %s %s";
         $fieldsCompiled = implode(',', $this->getFields());
-        return trim(sprintf($sqlTemplate, $fieldsCompiled, $this->getTable(), $this->getWhereStatement()));
+        return trim(sprintf(
+                $sqlTemplate, $fieldsCompiled, $this->getTable(),
+                $this->getWhereStatement()
+        ));
     }
 
     /**
-     *
-     * @param array $data
+     * acts as a cache to house ran queries
+     * @param array $data data to be stored
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setData(array $data)
     {
@@ -96,20 +155,31 @@ class Select implements CommandInterface
         return $this;
     }
 
+    /**
+     * Acts as a cache array that holds the data returned from a query
+     * @return mixed
+     * @since v1.0.0
+     */
     public function getData()
     {
         return $this->data;
     }
 
+    /**
+     * retrieves the table with which you wish to select from
+     * @return string  table with which you wish to select from
+     * @since v1.0.0
+     */
     public function getTable()
     {
         return $this->table;
     }
 
     /**
-     *
-     * @param string $table
+     * defines a table with which you wish to append to
+     * @param string $table a table with which you wish to append to
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setTable($table)
     {
@@ -117,6 +187,11 @@ class Select implements CommandInterface
         return $this;
     }
 
+    /**
+     * Returns the fields to be returned, if no fields defined all fields are returned
+     * @return array
+     * @since v1.0.0
+     */
     public function getFields()
     {
         return $this->fields;
@@ -126,6 +201,7 @@ class Select implements CommandInterface
      * Defines the fields to be returned, if no fields defined all fields are returned
      * @param array $fields
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setFields(array $fields = null)
     {
@@ -133,6 +209,11 @@ class Select implements CommandInterface
         return $this;
     }
 
+    /**
+     * defines how data is returned
+     * @return  int $fetchStyle one of the PDO::FETCH_*
+     * @since v1.0.0
+     */
     public function getFetchStyle()
     {
         return $this->fetchStyle;
@@ -142,6 +223,7 @@ class Select implements CommandInterface
      * used to define how data is returned
      * @param int $fetchStyle one of the PDO::FETCH_*
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setFetchStyle($fetchStyle)
     {
@@ -152,6 +234,7 @@ class Select implements CommandInterface
     /**
      * sets if one or many records will be returned.
      * @return bool true for one record, false for all records
+     * @since v1.0.0
      */
     public function getFetchFlat()
     {
@@ -160,8 +243,10 @@ class Select implements CommandInterface
 
     /**
      * sets if one or many records will be returned.
-     * @param boolean $fetchFlat optional default value: false - true will return one record, false will return all records
+     * @param boolean $fetchFlat optional default value: false - true will
+     * return one record, false will return all records
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setFetchFlat($fetchFlat = true)
     {
@@ -172,6 +257,7 @@ class Select implements CommandInterface
     /**
      * Value to be returned if no data is found or query fails
      * @return mixed return the value used when the query returns false
+     * @since v1.0.0
      */
     public function getDefaultValue()
     {
@@ -180,8 +266,10 @@ class Select implements CommandInterface
 
     /**
      * Value to be returned if no data is found or query fails
-     * @param mixed $defaultValue optional default value: empty array - value to be returned on query failure
+     * @param mixed $defaultValue optional default value: empty array - value to
+     * be returned on query failure
      * @return $this for method chaining
+     * @since v1.0.0
      */
     public function setDefaultValue($defaultValue = [])
     {

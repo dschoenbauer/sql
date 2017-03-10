@@ -117,7 +117,7 @@
 
 				<b>Author:</b>
 				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
-			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Query.html#36-102" title="Go to source code">Sql/Query.php</a>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Query.html#34-124" title="Go to source code">Sql/Query.php</a>
 		<br>
 	</div>
 
@@ -137,7 +137,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_with">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Query.html#44-51" title="Go to source code">with</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#43-51" title="Go to source code">with</a>( )</code>
 
 		<div class="description short">
 			<p>provides a means for functional access to the objects of this library</p>
@@ -175,7 +175,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_create">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Query.html#53-62" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#53-65" title="Go to source code">create</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
 
 		<div class="description short">
 			<p>adds new data into a PDO connected resource</p>
@@ -190,7 +190,9 @@
 					<dt><var>$table</var></dt>
 					<dd>table with which you wish to append to</dd>
 					<dt><var>$data</var></dt>
-					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table</dd>
+					<dd><p>a single level associative array containing keys that
+represent the fields and values that represent new values to be added
+into the table</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -220,7 +222,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_select">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Query.html#64-77" title="Go to source code">select</a>( <span>string <var>$table</var></span>, <span>array <var>$fields</var> = []</span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$fetchStyle</var> = DSchoenbauer\Sql\PDO::FETCH_ASSOC</span>, <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$defaultValue</var> = []</span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#67-92" title="Go to source code">select</a>( <span>string <var>$table</var></span>, <span>array <var>$fields</var> = []</span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$fetchStyle</var> = DSchoenbauer\Sql\PDO::FETCH_ASSOC</span>, <span>boolean <var>$fetchFlat</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$defaultValue</var> = [] </span> )</code>
 
 		<div class="description short">
 			<p>retrieves data from a PDO connected resource</p>
@@ -235,15 +237,20 @@
 					<dt><var>$table</var></dt>
 					<dd>name of the table that houses the data</dd>
 					<dt><var>$fields</var></dt>
-					<dd>optional default value: empty array - defines which fields are returned if no fields defined a star will be used</dd>
+					<dd><p>optional default value: empty array - defines which
+fields are returned if no fields defined a star will be used</p></dd>
 					<dt><var>$where</var></dt>
-					<dd>optional default value: null - object used to limit the returned results</dd>
+					<dd><p>optional default value: null -
+object used to limit the returned results</p></dd>
 					<dt><var>$fetchStyle</var></dt>
-					<dd>optional default value: PDO::FETCH_ASSOC - sets how the PDO statement will return records</dd>
+					<dd><p>optional default value: PDO::FETCH_ASSOC -
+sets how the PDO statement will return records</p></dd>
 					<dt><var>$fetchFlat</var></dt>
-					<dd>optional default value: false - true will return one record, false will return all records</dd>
+					<dd><p>optional default value: false - true will
+return one record, false will return all records</p></dd>
 					<dt><var>$defaultValue</var></dt>
-					<dd>optional default value: empty array - value to be returned on query failure</dd>
+					<dd><p>optional default value: empty array -
+value to be returned on query failure</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -273,7 +280,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_update">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Query.html#79-89" title="Go to source code">update</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#94-109" title="Go to source code">update</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>changes values of existing data in a PDO connected resource</p>
@@ -288,14 +295,18 @@
 					<dt><var>$table</var></dt>
 					<dd>table with which you wish to update</dd>
 					<dt><var>$data</var></dt>
-					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be updated into the table</dd>
+					<dd><p>a single level associative array containing keys that
+represent the fields and values that represent new values to be updated
+into the table</p></dd>
 					<dt><var>$where</var></dt>
-					<dd>an object that is designed to return a where statement to limit the data that is affected by the update</dd>
+					<dd><p>an object that is designed to
+return a where statement to limit the data that is affected by the update</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-DSchoenbauer.Sql.Command.Update.html">DSchoenbauer\Sql\Command\Update</a></code><br>the update object responsible to handling the update of persistent records.
+					<code><a href="class-DSchoenbauer.Sql.Command.Update.html">DSchoenbauer\Sql\Command\Update</a></code><br><p>the update object responsible to handling the update of
+persistent records.</p>
 				</div>
 
 
@@ -320,7 +331,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Query.html#91-100" title="Go to source code">delete</a>( <span>string <var>$table</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Query.html#111-123" title="Go to source code">delete</a>( <span>string <var>$table</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>removes records from a PDO connected resource</p>
@@ -335,12 +346,14 @@
 					<dt><var>$table</var></dt>
 					<dd>table with which you wish to remove records from</dd>
 					<dt><var>$where</var></dt>
-					<dd>an object that is designed to return a where statement to limit the data that is affected by the delete</dd>
+					<dd><p>an object that is designed to
+return a where statement to limit the data that is affected by the delete</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-DSchoenbauer.Sql.Command.Delete.html">DSchoenbauer\Sql\Command\Delete</a></code><br>the delete object responsible for handling removal of persistent records
+					<code><a href="class-DSchoenbauer.Sql.Command.Delete.html">DSchoenbauer\Sql\Command\Delete</a></code><br><p>the delete object responsible for handling removal of
+persistent records</p>
 				</div>
 
 

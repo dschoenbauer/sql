@@ -53,7 +53,9 @@ class Query
     /**
      * adds new data into a PDO connected resource
      * @param string $table table with which you wish to append to
-     * @param array $data  a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
+     * @param array $data  a single level associative array containing keys that
+     * represent the fields and values that represent new values to be added
+     * into the table
      * @return Create a create object that manages the addition of new records
      * @since v1.0.0
      */
@@ -65,25 +67,40 @@ class Query
     /**
      * retrieves data from a PDO connected resource
      * @param string $table name of the table that houses the data
-     * @param array $fields optional default value: empty array - defines which fields are returned if no fields defined a star will be used
-     * @param WhereStatementInterface $where optional default value: null - object used to limit the returned results
-     * @param integer $fetchStyle optional default value: PDO::FETCH_ASSOC - sets how the PDO statement will return records
-     * @param boolean $fetchFlat optional default value: false - true will return one record, false will return all records
-     * @param mixed $defaultValue optional default value: empty array - value to be returned on query failure
+     * @param array $fields optional default value: empty array - defines which
+     * fields are returned if no fields defined a star will be used
+     * @param WhereStatementInterface $where optional default value: null -
+     * object used to limit the returned results
+     * @param integer $fetchStyle optional default value: PDO::FETCH_ASSOC -
+     * sets how the PDO statement will return records
+     * @param boolean $fetchFlat optional default value: false - true will
+     * return one record, false will return all records
+     * @param mixed $defaultValue optional default value: empty array -
+     * value to be returned on query failure
      * @return Select the select object responsible for retrieving records
      * @since v1.0.0
      */
-    public function select($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = [])
-    {
+    public function select(
+        $table,
+        $fields = [],
+        WhereStatementInterface $where = null,
+        $fetchStyle = PDO::FETCH_ASSOC,
+        $fetchFlat = false,
+        $defaultValue = []
+    ) {
         return new Select($table, $fields, $where, $fetchStyle, $fetchFlat, $defaultValue);
     }
 
     /**
      * changes values of existing data in a PDO connected resource
      * @param string $table table with which you wish to update
-     * @param array $data a single level associative array containing keys that represent the fields and values that represent new values to be updated into the table
-     * @param WhereStatementInterface $where an object that is designed to return a where statement to limit the data that is affected by the update
-     * @return Update the update object responsible to handling the update of persistent records.
+     * @param array $data a single level associative array containing keys that
+     * represent the fields and values that represent new values to be updated
+     * into the table
+     * @param WhereStatementInterface $where an object that is designed to
+     * return a where statement to limit the data that is affected by the update
+     * @return Update the update object responsible to handling the update of
+     * persistent records.
      * @since v1.0.0
      */
     public function update($table, array $data, WhereStatementInterface $where = null)
@@ -94,8 +111,10 @@ class Query
     /**
      * removes records from a PDO connected resource
      * @param string $table table with which you wish to remove records from
-     * @param WhereStatementInterface $where  an object that is designed to return a where statement to limit the data that is affected by the delete
-     * @return Delete the delete object responsible for handling removal of persistent records
+     * @param WhereStatementInterface $where  an object that is designed to
+     * return a where statement to limit the data that is affected by the delete
+     * @return Delete the delete object responsible for handling removal of
+     * persistent records
      * @since v1.0.0
      */
     public function delete($table, WhereStatementInterface $where = null)

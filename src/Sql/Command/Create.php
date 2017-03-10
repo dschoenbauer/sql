@@ -41,7 +41,9 @@ class Create implements CommandInterface
 
     /**
      * @param string $table table with which you wish to append to
-     * @param array $data  a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
+     * @param array $data  a single level associative array containing keys that
+     * represent the fields and values that represent new values to be added into
+     * the table
      * @since v1.0.0
      */
     public function __construct($table, $data)
@@ -50,9 +52,12 @@ class Create implements CommandInterface
     }
 
     /**
-     * Generates a SQL statement ready to be prepared for execution with the intent of updating data
-     * @return string a string that represents an update statement ready to be prepared by PDO
-     * @throws EmptyDatasetException if no data has been set no fields can be discerned and no query can be made
+     * Generates a SQL statement ready to be prepared for execution with the
+     * intent of updating data
+     * @return string a string that represents an update statement ready to be
+     * prepared by PDO
+     * @throws EmptyDatasetException if no data has been set no fields can be
+     * discerned and no query can be made
      * @since v1.0.0
      */
     public function getSql()
@@ -62,14 +67,21 @@ class Create implements CommandInterface
         }
 
         $sqlTemplate = "INSERT INTO %s (%s) VALUES (:%s)";
-        return sprintf($sqlTemplate, $this->getTable(), implode(', ', array_keys($this->getData())), implode(', :', array_keys($this->getData())));
+        return sprintf(
+            $sqlTemplate,
+            $this->getTable(),
+            implode(', ', array_keys($this->getData())),
+            implode(', :', array_keys($this->getData()))
+        );
     }
 
     /**
      * takes the SQL and the data provided and executes the query with the data
-     * @param PDO $pdo a connection object that defines where the connection is to be executed
+     * @param PDO $pdo a connection object that defines where the connection is
+     * to be executed
      * @return string will return the lastInsertId from the PDO connection object
-     * @throws ExecutionErrorException thrown when any exception or SQL failure occurs
+     * @throws ExecutionErrorException thrown when any exception or SQL failure
+     * occurs
      * @since v1.0.0
      */
     public function execute(PDO $pdo)
@@ -97,8 +109,11 @@ class Create implements CommandInterface
     }
 
     /**
-     * retrieves the data that is used to generate the create statement. The fields of the array are used to generate the field list.
-     * @return array a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
+     * retrieves the data that is used to generate the create statement. The
+     * fields of the array are used to generate the field list.
+     * @return array a single level associative array containing keys that
+     * represent the fields and values that represent new values to be added
+     * into the table
      * @since v1.0.0
      */
     public function getData()
@@ -119,8 +134,11 @@ class Create implements CommandInterface
     }
 
     /**
-     * sets the data that is used to generate the create statement. The fields of the array are used to generate the field list.
-     * @param array $data a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
+     * sets the data that is used to generate the create statement. The fields
+     * of the array are used to generate the field list.
+     * @param array $data a single level associative array containing keys that
+     * represent the fields and values that represent new values to be added
+     * into the table
      * @return $this for method chaining
      * @since v1.0.0
      */

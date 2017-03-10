@@ -139,7 +139,7 @@
 
 				<b>Author:</b>
 				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
-			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Delete.html#33-111" title="Go to source code">Sql/Command/Delete.php</a>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Delete.html#31-119" title="Go to source code">Sql/Command/Delete.php</a>
 		<br>
 	</div>
 
@@ -159,7 +159,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#44-51" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#43-52" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -174,7 +174,8 @@
 					<dt><var>$table</var></dt>
 					<dd>table with which you wish to remove records from</dd>
 					<dt><var>$where</var></dt>
-					<dd>an object that is designed to return a where statement to limit the data that is affected by the delete</dd>
+					<dd><p>an object that is designed to
+return a where statement to limit the data that is affected by the delete</p></dd>
 				</dl></div>
 
 
@@ -200,7 +201,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#53-70" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#54-72" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
 
 		<div class="description short">
 			<p>takes the SQL and the data provided and executes the query with the data</p>
@@ -249,20 +250,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#72-79" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#74-85" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
-			<p>retrieves the data that is uses to fulfill the requirements of a prepared statement</p>
+			<p>retrieves the data that is uses to fulfill the requirements of a prepared
+statement</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>retrieves the data that is uses to fulfill the requirements of a prepared statement</p>
+			<p>retrieves the data that is uses to fulfill the requirements of a prepared
+statement</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					array<br>a single level associative array containing keys that represent the fields and values that represent items to fulfill the requirements of a prepared statement
+					array<br><p>a single level associative array containing keys that
+represent the fields and values that represent items to fulfill the
+requirements of a prepared statement</p>
 				</div>
 
 
@@ -289,7 +294,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSql">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#81-89" title="Go to source code">getSql</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#87-96" title="Go to source code">getSql</a>( )</code>
 
 		<div class="description short">
 			<p>Generates a SQL statement ready to be prepared for execution with the intent of removing data</p>
@@ -329,7 +334,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#91-98" title="Go to source code">getTable</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#98-106" title="Go to source code">getTable</a>( )</code>
 
 		<div class="description short">
 			<p>retrieves the table with which you wish to remove from</p>
@@ -367,7 +372,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#100-109" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Delete.html#108-118" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
 			<p>defines a table with which you wish to remove from</p>

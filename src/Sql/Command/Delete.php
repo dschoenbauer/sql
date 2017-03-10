@@ -42,7 +42,8 @@ class Delete implements CommandInterface
 
     /**
      * @param string $table  table with which you wish to remove records from
-     * @param WhereStatementInterface $where an object that is designed to return a where statement to limit the data that is affected by the delete
+     * @param WhereStatementInterface $where an object that is designed to
+     * return a where statement to limit the data that is affected by the delete
      * @since v1.0.0
      */
     public function __construct($table, WhereStatementInterface $where = null)
@@ -71,8 +72,11 @@ class Delete implements CommandInterface
     }
 
     /**
-     * retrieves the data that is uses to fulfill the requirements of a prepared statement
-     * @return array a single level associative array containing keys that represent the fields and values that represent items to fulfill the requirements of a prepared statement
+     * retrieves the data that is uses to fulfill the requirements of a prepared
+     * statement
+     * @return array a single level associative array containing keys that
+     * represent the fields and values that represent items to fulfill the
+     * requirements of a prepared statement
      * @since v1.0.0
      */
     public function getData()

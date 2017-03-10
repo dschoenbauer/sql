@@ -139,7 +139,7 @@
 				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
 				<b>Since:</b>
 				v1.0.0<br>
-			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Create.html#33-127" title="Go to source code">Sql/Command/Create.php</a>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Create.html#31-150" title="Go to source code">Sql/Command/Create.php</a>
 		<br>
 	</div>
 
@@ -159,7 +159,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#43-50" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#42-52" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span> )</code>
 
 		<div class="description short">
 			
@@ -174,7 +174,9 @@
 					<dt><var>$table</var></dt>
 					<dd>table with which you wish to append to</dd>
 					<dt><var>$data</var></dt>
-					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table</dd>
+					<dd><p>a single level associative array containing keys that
+represent the fields and values that represent new values to be added into
+the table</p></dd>
 				</dl></div>
 
 
@@ -200,25 +202,29 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSql">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#52-65" title="Go to source code">getSql</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#54-76" title="Go to source code">getSql</a>( )</code>
 
 		<div class="description short">
-			<p>Generates a SQL statement ready to be prepared for execution with the intent of updating data</p>
+			<p>Generates a SQL statement ready to be prepared for execution with the
+intent of updating data</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Generates a SQL statement ready to be prepared for execution with the intent of updating data</p>
+			<p>Generates a SQL statement ready to be prepared for execution with the
+intent of updating data</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					string<br>a string that represents an update statement ready to be prepared by PDO
+					string<br><p>a string that represents an update statement ready to be
+prepared by PDO</p>
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-DSchoenbauer.Sql.Exception.EmptyDatasetException.html">DSchoenbauer\Sql\Exception\EmptyDatasetException</a></code><br>if no data has been set no fields can be discerned and no query can be made
+					<code><a href="class-DSchoenbauer.Sql.Exception.EmptyDatasetException.html">DSchoenbauer\Sql\Exception\EmptyDatasetException</a></code><br><p>if no data has been set no fields can be
+discerned and no query can be made</p>
 				</div>
 
 				<h4>Since</h4>
@@ -244,7 +250,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#67-85" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#78-99" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
 
 		<div class="description short">
 			<p>takes the SQL and the data provided and executes the query with the data</p>
@@ -257,7 +263,8 @@
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pdo</var></dt>
-					<dd>a connection object that defines where the connection is to be executed</dd>
+					<dd><p>a connection object that defines where the connection is
+to be executed</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
@@ -267,7 +274,8 @@
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><a href="class-DSchoenbauer.Sql.Exception.ExecutionErrorException.html">DSchoenbauer\Sql\Exception\ExecutionErrorException</a></code><br>thrown when any exception or SQL failure occurs
+					<code><a href="class-DSchoenbauer.Sql.Exception.ExecutionErrorException.html">DSchoenbauer\Sql\Exception\ExecutionErrorException</a></code><br><p>thrown when any exception or SQL failure
+occurs</p>
 				</div>
 
 				<h4>Since</h4>
@@ -293,7 +301,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#87-94" title="Go to source code">getTable</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#101-109" title="Go to source code">getTable</a>( )</code>
 
 		<div class="description short">
 			<p>retrieves the table with which you wish to append to</p>
@@ -331,20 +339,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#96-103" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#111-122" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
-			<p>retrieves the data that is used to generate the create statement. The fields of the array are used to generate the field list.</p>
+			<p>retrieves the data that is used to generate the create statement. The
+fields of the array are used to generate the field list.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>retrieves the data that is used to generate the create statement. The fields of the array are used to generate the field list.</p>
+			<p>retrieves the data that is used to generate the create statement. The
+fields of the array are used to generate the field list.</p>
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					array<br>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
+					array<br><p>a single level associative array containing keys that
+represent the fields and values that represent new values to be added
+into the table</p>
 				</div>
 
 
@@ -371,7 +383,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#105-114" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#124-134" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
 			<p>defines a table with which you wish to append to</p>
@@ -414,20 +426,24 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#116-125" title="Go to source code">setData</a>( <span>array <var>$data</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Create.html#136-149" title="Go to source code">setData</a>( <span>array <var>$data</var></span> )</code>
 
 		<div class="description short">
-			<p>sets the data that is used to generate the create statement. The fields of the array are used to generate the field list.</p>
+			<p>sets the data that is used to generate the create statement. The fields
+of the array are used to generate the field list.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>sets the data that is used to generate the create statement. The fields of the array are used to generate the field list.</p>
+			<p>sets the data that is used to generate the create statement. The fields
+of the array are used to generate the field list.</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$data</var></dt>
-					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table</dd>
+					<dd><p>a single level associative array containing keys that
+represent the fields and values that represent new values to be added
+into the table</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>

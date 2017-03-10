@@ -44,21 +44,31 @@ class Update implements CommandInterface
 
     /**
      * @param string $table table with which you wish to append to
-     * @param array $data  a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
-     * @param WhereStatementInterface $where an object that is designed to return a where statement to limit the data that is affected by the update
+     * @param array $data  a single level associative array containing keys that
+     * represent the fields and values that represent new values to be added into
+     * the table
+     * @param WhereStatementInterface $where an object that is designed to return
+     * a where statement to limit the data that is affected by the update
      * @since v1.0.0
      */
-    public function __construct($table, array $data, WhereStatementInterface $where = null)
-    {
+    public function __construct(
+        $table,
+        array $data,
+        WhereStatementInterface $where = null
+    ) {
+    
         $this->setTable($table)->setData($data)->setWhere($where);
     }
 
     /**
      * takes the SQL and the data provided and executes the query with the data
-     * @param PDO $pdo a connection object that defines where the connection is to be executed
+     * @param PDO $pdo a connection object that defines where the connection is
+     * to be executed
      * @return bool TRUE on success or FALSE on failure.
-     * @throws EmptyDatasetException  if no data has been set no fields can be discerned and no query can be made
-     * @throws ExecutionErrorException thrown when any exception or SQL failure occurs
+     * @throws EmptyDatasetException  if no data has been set no fields can be
+     * discerned and no query can be made
+     * @throws ExecutionErrorException thrown when any exception or SQL failure
+     * occurs
      * @since v1.0.0
      */
     public function execute(PDO $pdo)
@@ -74,9 +84,12 @@ class Update implements CommandInterface
     }
 
     /**
-     * Generates a SQL statement ready to be prepared for execution with the intent of updating data
-     * @return string a string that represents an update statement ready to be prepared by PDO
-     * @throws EmptyDatasetException if no data has been set no fields can be discerned and no query can be made
+     * Generates a SQL statement ready to be prepared for execution with the
+     * intent of updating data
+     * @return string a string that represents an update statement ready to be
+     * prepared by PDO
+     * @throws EmptyDatasetException if no data has been set no fields can be
+     * discerned and no query can be made
      * @since v1.0.0
      */
     public function getSql()
@@ -90,7 +103,12 @@ class Update implements CommandInterface
         }, array_keys($this->getData()));
         $where = $this->getWhereStatement();
         $sqlTemplate = "UPDATE %s SET %s %s";
-        return trim(sprintf($sqlTemplate, $this->getTable(), implode(',', $sets), $where));
+        return trim(sprintf(
+            $sqlTemplate,
+            $this->getTable(),
+            implode(',', $sets),
+            $where
+        ));
     }
 
     /**
@@ -122,8 +140,10 @@ class Update implements CommandInterface
     }
 
     /**
-     * retrieves the data that is used to generate the update statement. The fields of the array are used to generate the field list.
-     * @return array a single level associative array containing keys that represent the fields and values that represent new values to be updated in the table
+     * retrieves the data that is used to generate the update statement. The
+     * fields of the array are used to generate the field list.
+     * @return array a single level associative array containing keys that
+     * represent the fields and values that represent new values to be updated in the table
      * @since v1.0.0
      */
     public function getData()
@@ -132,8 +152,10 @@ class Update implements CommandInterface
     }
 
     /**
-     * sets the data that is used to generate the update statement. The fields of the array are used to generate the field list.
-     * @param array $data a single level associative array containing keys that represent the fields and values that represent values to be updated into the table
+     * sets the data that is used to generate the update statement. The fields
+     * of the array are used to generate the field list.
+     * @param array $data a single level associative array containing keys that
+     * represent the fields and values that represent values to be updated into the table
      * @return $this for method chaining
      * @since v1.0.0
      */
