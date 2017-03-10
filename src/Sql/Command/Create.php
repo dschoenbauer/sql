@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
@@ -35,17 +33,19 @@ use PDO;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  * @since v1.0.0
  */
-class Create implements CommandInterface {
+class Create implements CommandInterface
+{
 
-    private $_table;
-    private $_data;
+    private $table;
+    private $data;
 
     /**
      * @param string $table table with which you wish to append to
      * @param array $data  a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
      * @since v1.0.0
      */
-    public function __construct($table, $data) {
+    public function __construct($table, $data)
+    {
         $this->setTable($table)->setData($data);
     }
 
@@ -55,7 +55,8 @@ class Create implements CommandInterface {
      * @throws EmptyDatasetException if no data has been set no fields can be discerned and no query can be made
      * @since v1.0.0
      */
-    public function getSql() {
+    public function getSql()
+    {
         if (count($this->getData()) === 0) {
             throw new EmptyDatasetException();
         }
@@ -71,7 +72,8 @@ class Create implements CommandInterface {
      * @throws ExecutionErrorException thrown when any exception or SQL failure occurs
      * @since v1.0.0
      */
-    public function execute(PDO $pdo) {
+    public function execute(PDO $pdo)
+    {
         try {
             $sql = $this->getSql();
             $stmt = $pdo->prepare($sql);
@@ -89,8 +91,9 @@ class Create implements CommandInterface {
      * @return string  table with which you wish to append to
      * @since v1.0.0
      */
-    public function getTable() {
-        return $this->_table;
+    public function getTable()
+    {
+        return $this->table;
     }
 
     /**
@@ -98,8 +101,9 @@ class Create implements CommandInterface {
      * @return array a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
      * @since v1.0.0
      */
-    public function getData() {
-        return $this->_data;
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**
@@ -108,20 +112,21 @@ class Create implements CommandInterface {
      * @return $this for method chaining
      * @since v1.0.0
      */
-    public function setTable($table) {
-        $this->_table = $table;
+    public function setTable($table)
+    {
+        $this->table = $table;
         return $this;
     }
 
     /**
      * sets the data that is used to generate the create statement. The fields of the array are used to generate the field list.
      * @param array $data a single level associative array containing keys that represent the fields and values that represent new values to be added into the table
-     * @return $this for method chaining 
+     * @return $this for method chaining
      * @since v1.0.0
      */
-    public function setData(array $data) {
-        $this->_data = $data;
+    public function setData(array $data)
+    {
+        $this->data = $data;
         return $this;
     }
-
 }

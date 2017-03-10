@@ -109,7 +109,7 @@
 
 
 	<div class="description">
-	<p>Description of Update</p>
+	<p>updates values in a PDO connected resource</p>
 	</div>
 
 	<dl class="tree">
@@ -139,7 +139,9 @@
 
 				<b>Author:</b>
 				David Schoenbauer <a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x64;&#115;&#x63;h&#111;&#x65;&#110;&#98;&#x61;&#117;&#x65;r&#64;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;</a><br>
-			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Update.html#34-97" title="Go to source code">Sql/Command/Update.php</a>
+				<b>Since:</b>
+				v1.0.0<br>
+			<b>Located at</b> <a href="source-class-DSchoenbauer.Sql.Command.Update.html#34-139" title="Go to source code">Sql/Command/Update.php</a>
 		<br>
 	</div>
 
@@ -159,7 +161,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#46-48" title="Go to source code">__construct</a>( <span> <var>$table</var></span>, <span>array <var>$data</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#46-54" title="Go to source code">__construct</a>( <span>string <var>$table</var></span>, <span>array <var>$data</var></span>, <span><code><a href="class-DSchoenbauer.Sql.Where.WhereStatementInterface.html">DSchoenbauer\Sql\Where\WhereStatementInterface</a></code> <var>$where</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			
@@ -169,9 +171,22 @@
 			
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>table with which you wish to append to</dd>
+					<dt><var>$data</var></dt>
+					<dd>a single level associative array containing keys that represent the fields and values that represent new values to be added into the table</dd>
+					<dt><var>$where</var></dt>
+					<dd>an object that is designed to return a where statement to limit the data that is affected by the update</dd>
+				</dl></div>
 
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -182,35 +197,44 @@
 		<td class="attributes"><code>
 			 public 
 
-			mixed
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_execute">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#50-59" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#56-73" title="Go to source code">execute</a>( <span>PDO <var>$pdo</var></span> )</code>
 
 		<div class="description short">
-			<p>this will take the sql and the data and execute them in a manner that makes sense for the command</p>
+			<p>takes the SQL and the data provided and executes the query with the data</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>this will take the sql and the data and execute them in a manner that makes sense for the command</p>
+			<p>takes the SQL and the data provided and executes the query with the data</p>
 
 
 				<h4>Parameters</h4>
 				<div class="list"><dl>
 					<dt><var>$pdo</var></dt>
-					<dd>a PDO connection to a given resource</dd>
+					<dd>a connection object that defines where the connection is to be executed</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					mixed<br>can return what makes most sense for the command
+					boolean<br>TRUE on success or FALSE on failure.
 				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Exception.EmptyDatasetException.html">DSchoenbauer\Sql\Exception\EmptyDatasetException</a></code><br>if no data has been set no fields can be discerned and no query can be made<br>
+					<code><a href="class-DSchoenbauer.Sql.Exception.ExecutionErrorException.html">DSchoenbauer\Sql\Exception\ExecutionErrorException</a></code><br>thrown when any exception or SQL failure occurs
+				</div>
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 				<h4>Implementation of</h4>
@@ -223,26 +247,38 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getSql">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#61-72" title="Go to source code">getSql</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#75-92" title="Go to source code">getSql</a>( )</code>
 
 		<div class="description short">
-			<p>A SQL statement that has been formatted per the PDO prepared statement syntax</p>
+			<p>Generates a SQL statement ready to be prepared for execution with the intent of updating data</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>A SQL statement that has been formatted per the PDO prepared statement syntax</p>
+			<p>Generates a SQL statement ready to be prepared for execution with the intent of updating data</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>a string that represents an update statement ready to be prepared by PDO
+				</div>
 
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-DSchoenbauer.Sql.Exception.EmptyDatasetException.html">DSchoenbauer\Sql\Exception\EmptyDatasetException</a></code><br>if no data has been set no fields can be discerned and no query can be made
+				</div>
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 				<h4>Implementation of</h4>
@@ -255,26 +291,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			string
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#74-76" title="Go to source code">getTable</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#94-101" title="Go to source code">getTable</a>( )</code>
 
 		<div class="description short">
-			
+			<p>retrieves the table with which you wish to update</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>retrieves the table with which you wish to update</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>table with which you wish to update
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -292,19 +336,32 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setTable">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#78-81" title="Go to source code">setTable</a>( <span> <var>$table</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#103-112" title="Go to source code">setTable</a>( <span>string <var>$table</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>defines a table with which you wish to update</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>defines a table with which you wish to update</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd>a table with which you wish to update</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this for method chaining
+				</div>
 
 
-
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>
@@ -322,7 +379,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getCombinedData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#83-86" title="Go to source code">getCombinedData</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#114-117" title="Go to source code">getCombinedData</a>( )</code>
 
 		<div class="description short">
 			
@@ -345,26 +402,34 @@
 		<td class="attributes"><code>
 			 public 
 
-			
+			array
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_getData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#88-90" title="Go to source code">getData</a>( )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#119-126" title="Go to source code">getData</a>( )</code>
 
 		<div class="description short">
-			<p>a single level array that fulfills the requirements of the SQL statement</p>
+			<p>retrieves the data that is used to generate the update statement. The fields of the array are used to generate the field list.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>a single level array that fulfills the requirements of the SQL statement</p>
+			<p>retrieves the data that is used to generate the update statement. The fields of the array are used to generate the field list.</p>
 
 
 
+				<h4>Returns</h4>
+				<div class="list">
+					array<br>a single level associative array containing keys that represent the fields and values that represent new values to be updated in the table
+				</div>
 
 
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 				<h4>Implementation of</h4>
@@ -384,19 +449,32 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setData">#</a>
-		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#92-95" title="Go to source code">setData</a>( <span> <var>$data</var></span> )</code>
+		<code><a href="source-class-DSchoenbauer.Sql.Command.Update.html#128-137" title="Go to source code">setData</a>( <span>array <var>$data</var></span> )</code>
 
 		<div class="description short">
-			
+			<p>sets the data that is used to generate the update statement. The fields of the array are used to generate the field list.</p>
 		</div>
 
 		<div class="description detailed hidden">
-			
+			<p>sets the data that is used to generate the update statement. The fields of the array are used to generate the field list.</p>
 
 
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd>a single level associative array containing keys that represent the fields and values that represent values to be updated into the table</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<br>$this for method chaining
+				</div>
 
 
-
+				<h4>Since</h4>
+				<div class="list">
+						v1.0.0<br>
+				</div>
 
 
 		</div>

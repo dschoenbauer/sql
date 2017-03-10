@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql;
 
 use DSchoenbauer\Sql\Command\Create;
@@ -37,16 +35,18 @@ use PDO;
  * a facade object that allows easier implementation of the SQL library
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
- * 
+ *
  */
-class Query {
+class Query
+{
 
     /**
      * provides a means for functional access to the objects of this library
      * @return \static a new instance of this object
      * @since v1.0.0
      */
-    public static function with() {
+    public static function with()
+    {
         return new static();
     }
 
@@ -57,7 +57,8 @@ class Query {
      * @return Create a create object that manages the addition of new records
      * @since v1.0.0
      */
-    public function create($table, array $data) {
+    public function create($table, array $data)
+    {
         return new Create($table, $data);
     }
 
@@ -72,7 +73,8 @@ class Query {
      * @return Select the select object responsible for retrieving records
      * @since v1.0.0
      */
-    public function select($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = []) {
+    public function select($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = [])
+    {
         return new Select($table, $fields, $where, $fetchStyle, $fetchFlat, $defaultValue);
     }
 
@@ -84,7 +86,8 @@ class Query {
      * @return Update the update object responsible to handling the update of persistent records.
      * @since v1.0.0
      */
-    public function update($table, array $data, WhereStatementInterface $where = null) {
+    public function update($table, array $data, WhereStatementInterface $where = null)
+    {
         return new Update($table, $data, $where);
     }
 
@@ -95,8 +98,8 @@ class Query {
      * @return Delete the delete object responsible for handling removal of persistent records
      * @since v1.0.0
      */
-    public function delete($table, WhereStatementInterface $where = null) {
+    public function delete($table, WhereStatementInterface $where = null)
+    {
         return new Delete($table, $where);
     }
-
 }

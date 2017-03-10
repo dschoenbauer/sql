@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
@@ -34,22 +32,25 @@ use PDOStatement;
 /**
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Select implements CommandInterface {
+class Select implements CommandInterface
+{
 
-    private $_table;
-    private $_fields = ['*'];
-    private $_data = [];
-    private $_fetchStyle = \PDO::FETCH_ASSOC;
-    private $_fetchFlat = false;
-    private $_defaultValue = [];
+    private $table;
+    private $fields = ['*'];
+    private $data = [];
+    private $fetchStyle = \PDO::FETCH_ASSOC;
+    private $fetchFlat = false;
+    private $defaultValue = [];
 
     use WhereTrait;
 
-    public function __construct($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = \PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = []) {
+    public function __construct($table, $fields = [], WhereStatementInterface $where = null, $fetchStyle = \PDO::FETCH_ASSOC, $fetchFlat = false, $defaultValue = [])
+    {
         $this->setTable($table)->setFields($fields)->setWhere($where)->setFetchStyle($fetchStyle)->setFetchFlat($fetchFlat)->setDefaultValue($defaultValue);
     }
 
-    public function execute(PDO $pdo) {
+    public function execute(PDO $pdo)
+    {
         try {
             $stmt = $pdo->prepare($this->getSql());
             $this->statementExecute($stmt, $this->getWhereData());
@@ -61,78 +62,130 @@ class Select implements CommandInterface {
         }
     }
 
-    protected function statementExecute(PDOStatement $stmt, array $whereData) {
+    protected function statementExecute(PDOStatement $stmt, array $whereData)
+    {
         if (count($whereData) > 0) {
             return $stmt->execute($whereData);
         }
         return $stmt->execute();
     }
 
-    protected function fetchData(PDOStatement $stmt, $fetchFlat, $fetchStyle) {
+    protected function fetchData(PDOStatement $stmt, $fetchFlat, $fetchStyle)
+    {
         if ($fetchFlat) {
             return $stmt->fetch($fetchStyle);
         }
         return $stmt->fetchAll($fetchStyle);
     }
 
-    public function getSql() {
+    public function getSql()
+    {
         $sqlTemplate = "SELECT %s FROM %s %s";
         $fieldsCompiled = implode(',', $this->getFields());
         return trim(sprintf($sqlTemplate, $fieldsCompiled, $this->getTable(), $this->getWhereStatement()));
     }
 
-    public function setData(array $data) {
-        $this->_data = $data;
+    /**
+     *
+     * @param array $data
+     * @return $this for method chaining
+     */
+    public function setData(array $data)
+    {
+        $this->data = $data;
         return $this;
     }
 
-    public function getData() {
-        return $this->_data;
+    public function getData()
+    {
+        return $this->data;
     }
 
-    public function getTable() {
-        return $this->_table;
+    public function getTable()
+    {
+        return $this->table;
     }
 
-    public function setTable($table) {
-        $this->_table = $table;
+    /**
+     *
+     * @param string $table
+     * @return $this for method chaining
+     */
+    public function setTable($table)
+    {
+        $this->table = $table;
         return $this;
     }
 
-    public function getFields() {
-        return $this->_fields;
+    public function getFields()
+    {
+        return $this->fields;
     }
 
-    public function setFields(array $fields = null) {
-        $this->_fields = $fields ?: ["*"];
+    /**
+     * Defines the fields to be returned, if no fields defined all fields are returned
+     * @param array $fields
+     * @return $this for method chaining
+     */
+    public function setFields(array $fields = null)
+    {
+        $this->fields = $fields ?: ["*"];
         return $this;
     }
 
-    public function getFetchStyle() {
-        return $this->_fetchStyle;
+    public function getFetchStyle()
+    {
+        return $this->fetchStyle;
     }
 
-    public function setFetchStyle($fetchStyle) {
-        $this->_fetchStyle = $fetchStyle;
+    /**
+     * used to define how data is returned
+     * @param int $fetchStyle one of the PDO::FETCH_*
+     * @return $this for method chaining
+     */
+    public function setFetchStyle($fetchStyle)
+    {
+        $this->fetchStyle = $fetchStyle;
         return $this;
     }
 
-    public function getFetchFlat() {
-        return $this->_fetchFlat;
+    /**
+     * sets if one or many records will be returned.
+     * @return bool true for one record, false for all records
+     */
+    public function getFetchFlat()
+    {
+        return $this->fetchFlat;
     }
 
-    public function setFetchFlat($fetchFlat = true) {
-        $this->_fetchFlat = $fetchFlat;
+    /**
+     * sets if one or many records will be returned.
+     * @param boolean $fetchFlat optional default value: false - true will return one record, false will return all records
+     * @return $this for method chaining
+     */
+    public function setFetchFlat($fetchFlat = true)
+    {
+        $this->fetchFlat = $fetchFlat;
         return $this;
     }
 
-    public function getDefaultValue() {
-        return $this->_defaultValue;
+    /**
+     * Value to be returned if no data is found or query fails
+     * @return mixed return the value used when the query returns false
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
     }
 
-    public function setDefaultValue($defaultValue = []) {
-        $this->_defaultValue = $defaultValue;
+    /**
+     * Value to be returned if no data is found or query fails
+     * @param mixed $defaultValue optional default value: empty array - value to be returned on query failure
+     * @return $this for method chaining
+     */
+    public function setDefaultValue($defaultValue = [])
+    {
+        $this->defaultValue = $defaultValue;
         return $this;
     }
-
 }

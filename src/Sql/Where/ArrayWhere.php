@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Where;
 
 /**
@@ -31,100 +29,115 @@ namespace DSchoenbauer\Sql\Where;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class ArrayWhere implements WhereStatementInterface {
+class ArrayWhere implements WhereStatementInterface
+{
 
-    private $_data = [];
-    private $_whereData = [];
-    private $_fieldOperator = 'and';
-    private $_rowOperator = 'or';
-    private $_useParanthesis;
-    private $_saltSeed = 1;
+    private $data = [];
+    private $whereData = [];
+    private $fieldOperator = 'and';
+    private $rowOperator = 'or';
+    private $useParanthesis;
+    private $saltSeed = 1;
 
-    public function __construct($whereData, $fieldOperator = 'and', $rowOperator = 'or', $setUseParanthesis = true) {
+    public function __construct($whereData, $fieldOperator = 'and', $rowOperator = 'or', $setUseParanthesis = true)
+    {
         $this->setWhereData($whereData)
-                ->setFieldOperator($fieldOperator)
-                ->setRowOperator($rowOperator)
-                ->setUseParanthesis($setUseParanthesis);
+            ->setFieldOperator($fieldOperator)
+            ->setRowOperator($rowOperator)
+            ->setUseParanthesis($setUseParanthesis);
     }
 
-    public function getStatement() {
+    public function getStatement()
+    {
         return $this->recursiveStatement($this->getWhereData());
     }
 
-    protected function recursiveStatement(array $data) {
+    protected function recursiveStatement(array $data)
+    {
         $sql = [];
         if (!$this->isAssocArray($data)) {
             foreach ($data as $row) {
                 $sql[] = $this->recursiveStatement($row);
             }
         } else {
-            $sql[] = $this->buildRow($data, $this->_saltSeed++);
+            $sql[] = $this->buildRow($data, $this->saltSeed++);
         }
         return "(" . implode(") " . $this->getRowOperator() . " (", $sql) . ")";
     }
 
-    public function buildRow(array $assocArray, $keySalt) {
+    public function buildRow(array $assocArray, $keySalt)
+    {
         $prefix = $keySuffix = ($this->getUseParanthesis() ? "(" : "");
         $suffix = $keyPrefix = ($this->getUseParanthesis() ? ")" : "");
 
-        return $prefix . implode($keyPrefix . ' ' . $this->getFieldOperator() . ' ' . $keySuffix, array_map(function($key, $value) use ($keySalt) {
-                            $saltedKey = $key . "-" . $keySalt;
-                            $this->addData($saltedKey, $value);
-                            return sprintf('%s = :%s', $key, $saltedKey);
-                        }, array_keys($assocArray), array_values($assocArray))) . $suffix;
+        return $prefix . implode($keyPrefix . ' ' . $this->getFieldOperator() . ' ' . $keySuffix, array_map(function ($key, $value) use ($keySalt) {
+                    $saltedKey = $key . "-" . $keySalt;
+                    $this->addData($saltedKey, $value);
+                    return sprintf('%s = :%s', $key, $saltedKey);
+        }, array_keys($assocArray), array_values($assocArray))) . $suffix;
     }
 
-    protected function isAssocArray(array $array) {
+    protected function isAssocArray(array $array)
+    {
         return count(array_filter(array_keys($array), 'is_string')) > 0;
     }
 
-    public function getFieldOperator() {
-        return $this->_fieldOperator;
+    public function getFieldOperator()
+    {
+        return $this->fieldOperator;
     }
 
-    public function setFieldOperator($logicalOperator) {
-        $this->_fieldOperator = $logicalOperator;
+    public function setFieldOperator($logicalOperator)
+    {
+        $this->fieldOperator = $logicalOperator;
         return $this;
     }
 
-    public function getRowOperator() {
-        return $this->_rowOperator;
+    public function getRowOperator()
+    {
+        return $this->rowOperator;
     }
 
-    public function setRowOperator($rowOperator) {
-        $this->_rowOperator = $rowOperator;
+    public function setRowOperator($rowOperator)
+    {
+        $this->rowOperator = $rowOperator;
         return $this;
     }
 
     /**
-     * 
+     *
      * @return array
      */
-    public function getData() {
-        return $this->_data;
+    public function getData()
+    {
+        return $this->data;
     }
 
-    public function addData($key, $value) {
-        $this->_data[$key] = $value;
+    public function addData($key, $value)
+    {
+        $this->data[$key] = $value;
         return $this;
     }
 
-    public function getUseParanthesis() {
-        return $this->_useParanthesis;
+    public function getUseParanthesis()
+    {
+        return $this->useParanthesis;
     }
 
-    public function setUseParanthesis($useParanthesis = true) {
-        $this->_useParanthesis = $useParanthesis;
+    public function setUseParanthesis($useParanthesis = true)
+    {
+        $this->useParanthesis = $useParanthesis;
         return $this;
     }
 
-    public function getWhereData() {
-        return $this->_whereData;
+    public function getWhereData()
+    {
+        return $this->whereData;
     }
 
-    public function setWhereData($whereData) {
-        $this->_whereData = $whereData;
+    public function setWhereData($whereData)
+    {
+        $this->whereData = $whereData;
         return $this;
     }
-
 }

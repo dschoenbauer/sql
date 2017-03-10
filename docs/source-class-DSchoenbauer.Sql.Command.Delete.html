@@ -150,7 +150,7 @@
 </span></span><span id="37" class="l"><a href="#37"> 37: </a><span class="php-comment"> */</span>
 </span><span id="38" class="l"><a href="#38"> 38: </a><span class="php-keyword1">class</span> <span class="php-keyword2">Delete</span> <span class="php-keyword1">implements</span> CommandInterface {
 </span><span id="39" class="l"><a href="#39"> 39: </a>
-</span><span id="40" class="l"><a href="#40"> 40: </a>    <span class="php-keyword1">private</span> <span class="php-var">$_table</span>;
+</span><span id="40" class="l"><a href="#40"> 40: </a>    <span class="php-keyword1">private</span> <span class="php-var">$table</span>;
 </span><span id="41" class="l"><a href="#41"> 41: </a>
 </span><span id="42" class="l"><a href="#42"> 42: </a>    <span class="php-keyword1">use</span> WhereTrait;
 </span><span id="43" class="l"><a href="#43"> 43: </a>
@@ -207,7 +207,7 @@
 </span></span><span id="94" class="l"><a href="#94"> 94: </a><span class="php-comment">     * @since v1.0.0
 </span></span><span id="95" class="l"><a href="#95"> 95: </a><span class="php-comment">     */</span>
 </span><span id="96" class="l"><a href="#96"> 96: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> getTable() {
-</span><span id="97" class="l"><a href="#97"> 97: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;_table;
+</span><span id="97" class="l"><a href="#97"> 97: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;table;
 </span><span id="98" class="l"><a href="#98"> 98: </a>    }
 </span><span id="99" class="l"><a href="#99"> 99: </a>
 </span><span id="100" class="l"><a href="#100">100: </a>    <span class="php-comment">/**
@@ -217,7 +217,7 @@
 </span></span><span id="104" class="l"><a href="#104">104: </a><span class="php-comment">     * @since v1.0.0
 </span></span><span id="105" class="l"><a href="#105">105: </a><span class="php-comment">     */</span>
 </span><span id="106" class="l"><a href="#106">106: </a>    <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> setTable(<span class="php-var">$table</span>) {
-</span><span id="107" class="l"><a href="#107">107: </a>        <span class="php-var">$this</span>-&gt;_table = <span class="php-var">$table</span>;
+</span><span id="107" class="l"><a href="#107">107: </a>        <span class="php-var">$this</span>-&gt;table = <span class="php-var">$table</span>;
 </span><span id="108" class="l"><a href="#108">108: </a>        <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
 </span><span id="109" class="l"><a href="#109">109: </a>    }
 </span><span id="110" class="l"><a href="#110">110: </a>

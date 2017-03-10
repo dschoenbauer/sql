@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
@@ -35,9 +33,10 @@ use PDO;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Delete implements CommandInterface {
+class Delete implements CommandInterface
+{
 
-    private $_table;
+    private $table;
 
     use WhereTrait;
 
@@ -46,7 +45,8 @@ class Delete implements CommandInterface {
      * @param WhereStatementInterface $where an object that is designed to return a where statement to limit the data that is affected by the delete
      * @since v1.0.0
      */
-    public function __construct($table, WhereStatementInterface $where = null) {
+    public function __construct($table, WhereStatementInterface $where = null)
+    {
         $this->setTable($table)->setWhere($where);
     }
 
@@ -57,7 +57,8 @@ class Delete implements CommandInterface {
      * @throws ExecutionErrorException  thrown when any exception or SQL failure occurs
      * @since v1.0.0
      */
-    public function execute(PDO $pdo) {
+    public function execute(PDO $pdo)
+    {
         try {
             $stmt = $pdo->prepare($this->getSql());
             if (count($this->getData()) > 0) {
@@ -74,7 +75,8 @@ class Delete implements CommandInterface {
      * @return array a single level associative array containing keys that represent the fields and values that represent items to fulfill the requirements of a prepared statement
      * @since v1.0.0
      */
-    public function getData() {
+    public function getData()
+    {
         return $this->getWhereData();
     }
 
@@ -83,7 +85,8 @@ class Delete implements CommandInterface {
      * @return string a string that represents a delete statement ready to be prepared by PDO
      * @since v1.0.0
      */
-    public function getSql() {
+    public function getSql()
+    {
         $sqlTemplate = 'DELETE FROM %1$s %2$s';
         return trim(sprintf($sqlTemplate, $this->getTable(), $this->getWhereStatement()));
     }
@@ -93,8 +96,9 @@ class Delete implements CommandInterface {
      * @return string  table with which you wish to remove from
      * @since v1.0.0
      */
-    public function getTable() {
-        return $this->_table;
+    public function getTable()
+    {
+        return $this->table;
     }
 
     /**
@@ -103,9 +107,9 @@ class Delete implements CommandInterface {
      * @return $this for method chaining
      * @since v1.0.0
      */
-    public function setTable($table) {
-        $this->_table = $table;
+    public function setTable($table)
+    {
+        $this->table = $table;
         return $this;
     }
-
 }

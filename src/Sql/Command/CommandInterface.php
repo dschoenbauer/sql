@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,14 +22,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 /**
  * A common interface used for SQL commands
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-interface CommandInterface {
+interface CommandInterface
+{
 
     /**
      * A SQL statement that has been formatted per the PDO prepared statement syntax

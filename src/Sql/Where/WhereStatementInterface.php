@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,7 +22,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Where;
 
 /**
@@ -31,11 +29,12 @@ namespace DSchoenbauer\Sql\Where;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  * @since v1.0.0
  */
-interface WhereStatementInterface {
+interface WhereStatementInterface
+{
 
     /**
      * returns just the expression of a PDO prepared where statement
-     * 
+     *
      * i.e. id = :id
      */
     public function getStatement();
