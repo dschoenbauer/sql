@@ -29,6 +29,7 @@ namespace DSchoenbauer\Sql\Where;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
+
 class ArrayWhere implements WhereStatementInterface
 {
 
