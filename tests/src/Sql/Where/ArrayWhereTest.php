@@ -47,46 +47,46 @@ class ArrayWhereTest extends PHPUnit_Framework_TestCase
      */
     public function testGetStatementOffConstructorDefaultWithParentesis()
     {
-        $this->assertEquals("(id = :id-1)", $this->_object->getStatement());
-        $this->assertEquals(['id-1' => 1], $this->_object->getData());
+        $this->assertEquals("(id = :id_1)", $this->_object->getStatement());
+        $this->assertEquals(['id_1' => 1], $this->_object->getData());
     }
 
     public function testGetStatementOffConstructorExplicitWithParentesis()
     {
-        $this->assertEquals("(id = :id-1)", $this->_object->setUseParanthesis(true)->getStatement());
-        $this->assertEquals(['id-1' => 1], $this->_object->getData());
+        $this->assertEquals("(id = :id_1)", $this->_object->setUseParanthesis(true)->getStatement());
+        $this->assertEquals(['id_1' => 1], $this->_object->getData());
     }
 
     public function testGetStatementOffConstructorImplicitWithParentesis()
     {
-        $this->assertEquals("(id = :id-1)", $this->_object->setUseParanthesis()->getStatement());
-        $this->assertEquals(['id-1' => 1], $this->_object->getData());
+        $this->assertEquals("(id = :id_1)", $this->_object->setUseParanthesis()->getStatement());
+        $this->assertEquals(['id_1' => 1], $this->_object->getData());
     }
 
     public function testGetStatementOffConstructorImplicitWithParentesisGettingDataFirst()
     {
-        $this->assertEquals(['id-1' => 1], $this->_object->setUseParanthesis()->getData());
-        $this->assertEquals("(id = :id-1)", $this->_object->getStatement());
+        $this->assertEquals(['id_1' => 1], $this->_object->setUseParanthesis()->getData());
+        $this->assertEquals("(id = :id_1)", $this->_object->getStatement());
     }
 
     public function testGetStatementWithMoreDataWithParentesis()
     {
         $data = ['id' => 2, 'active' => true];
-        $this->assertEquals("(id = :id-1) and (active = :active-1)", $this->_object->setWhereData($data)->getStatement());
-        $this->assertEquals(['id-1' => 2, 'active-1' => true], $this->_object->getData());
+        $this->assertEquals("(id = :id_1) and (active = :active_1)", $this->_object->setWhereData($data)->getStatement());
+        $this->assertEquals(['id_1' => 2, 'active_1' => true], $this->_object->getData());
     }
 
     public function testGetStatementWithMoreDataWithParentesisOr()
     {
         $data = ['id' => 2, 'active' => true];
-        $this->assertEquals("(id = :id-1) or (active = :active-1)", $this->_object->setFieldOperator('or')->setWhereData($data)->getStatement());
-        $this->assertEquals(['id-1' => 2, 'active-1' => true], $this->_object->getData());
+        $this->assertEquals("(id = :id_1) or (active = :active_1)", $this->_object->setFieldOperator('or')->setWhereData($data)->getStatement());
+        $this->assertEquals(['id_1' => 2, 'active_1' => true], $this->_object->getData());
     }
 
     public function testGetStatementOffConstructorNoParentesis()
     {
-        $this->assertEquals("id = :id-1", $this->_object->setUseParanthesis(false)->getStatement());
-        $this->assertEquals(["id-1" => 1], $this->_object->getData());
+        $this->assertEquals("id = :id_1", $this->_object->setUseParanthesis(false)->getStatement());
+        $this->assertEquals(["id_1" => 1], $this->_object->getData());
     }
 
     public function testFieldOperatorOffConstructor()
@@ -143,9 +143,9 @@ class ArrayWhereTest extends PHPUnit_Framework_TestCase
             ['id' => 3, 'active' => false],
             ['id' => 4, 'active' => false],
         ];
-        $results = ['id-1' => 1, 'active-1' => false, 'id-2' => 2, 'active-2' => false, 'id-3' => 3, 'active-3' => false, 'id-4' => 4, 'active-4' => false];
+        $results = ['id_1' => 1, 'active_1' => false, 'id_2' => 2, 'active_2' => false, 'id_3' => 3, 'active_3' => false, 'id_4' => 4, 'active_4' => false];
 
-        $stmt = "((id = :id-1) and (active = :active-1)) or ((id = :id-2) and (active = :active-2)) or ((id = :id-3) and (active = :active-3)) or ((id = :id-4) and (active = :active-4))";
+        $stmt = "((id = :id_1) and (active = :active_1)) or ((id = :id_2) and (active = :active_2)) or ((id = :id_3) and (active = :active_3)) or ((id = :id_4) and (active = :active_4))";
         $this->assertEquals($results, $this->_object->setWhereData($data)->getData());
         $this->assertEquals($stmt, $this->_object->getStatement());
     }
