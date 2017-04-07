@@ -85,7 +85,7 @@ class ArrayWhere implements WhereStatementInterface
 
     private function getParenthesis(array $qualifyingArray = [], $count = -1)
     {
-        //['prefix' => null, 'keyPrefix' => null, 'keySuffix' => null, 'suffix' => null];
+        //prefix, keyPrefix, keySuffix, suffix
         $parenthesis = [null, null, null, null];
         if ($this->getUseParanthesis() && count($qualifyingArray) > $count) {
             $parenthesis = ["(", " (", ") ", ")"];
