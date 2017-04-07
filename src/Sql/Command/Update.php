@@ -47,7 +47,7 @@ class Update implements CommandInterface
      * @param array $data  a single level associative array containing keys that
      * represent the fields and values that represent new values to be added into
      * the table
-     * @param WhereStatementInterface $where an object that is designed to return
+     * @param null|WhereStatementInterface $where an object that is designed to return
      * a where statement to limit the data that is affected by the update
      * @since v1.0.0
      */

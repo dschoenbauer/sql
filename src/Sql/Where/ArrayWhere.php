@@ -48,13 +48,13 @@ class ArrayWhere implements WhereStatementInterface
             ->setWhereData($whereData);
     }
 
-    function getStatement()
+    public function getStatement()
     {
         $this->build($this->getWhereData());
         return $this->statement;
     }
 
-    function setStatement($statement)
+    public function setStatement($statement)
     {
         $this->statement = $statement;
         return $this;
@@ -102,7 +102,7 @@ class ArrayWhere implements WhereStatementInterface
                     $saltedKey = $key . "-" . $keySalt;
                     $this->addData($saltedKey, $value);
                     return sprintf('%s = :%s', $key, $saltedKey);
-                }, array_keys($assocArray), array_values($assocArray))) . $suffix;
+        }, array_keys($assocArray), array_values($assocArray))) . $suffix;
     }
 
     protected function isAssocArray(array $array)

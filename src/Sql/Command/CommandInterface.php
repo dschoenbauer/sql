@@ -33,11 +33,13 @@ interface CommandInterface
 
     /**
      * A SQL statement that has been formatted per the PDO prepared statement syntax
+     * @return string a string representing an action for the Database connection to take
      */
     public function getSql();
 
     /**
      * a single level array that fulfills the requirements of the SQL statement
+     * @return array array of data to be used as a return or as a source for actions of the query
      */
     public function getData();
 

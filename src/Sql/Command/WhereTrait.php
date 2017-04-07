@@ -38,7 +38,7 @@ trait WhereTrait
 
     /**
      * Adds the prefix WHERE to what the where object has provided as a where statement
-     * @return string returns a full WHERE statement will return null if not statement provided
+     * @return string|null returns a full WHERE statement will return null if not statement provided
      * @since v1.0.0
      */
     public function getWhereStatement()
@@ -71,8 +71,8 @@ trait WhereTrait
 
     /**
      * adds a where statement to a given statement
-     * @param WhereStatementInterface $where where statement to be used added
-     * @return inherit bubbling
+     * @param null|WhereStatementInterface $where where statement to be used added
+     * @return WhereTrait bubbling
      * @since v1.0.0
      */
     public function setWhere(WhereStatementInterface $where = null)
