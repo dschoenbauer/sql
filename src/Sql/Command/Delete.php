@@ -42,7 +42,7 @@ class Delete implements CommandInterface
 
     /**
      * @param string $table  table with which you wish to remove records from
-     * @param WhereStatementInterface $where an object that is designed to
+     * @param null|WhereStatementInterface $where an object that is designed to
      * return a where statement to limit the data that is affected by the delete
      * @since v1.0.0
      */

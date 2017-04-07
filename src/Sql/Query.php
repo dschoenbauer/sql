@@ -42,7 +42,7 @@ class Query
 
     /**
      * provides a means for functional access to the objects of this library
-     * @return \static a new instance of this object
+     * @return Query a new instance of this object
      * @since v1.0.0
      */
     public static function with()
@@ -69,7 +69,7 @@ class Query
      * @param string $table name of the table that houses the data
      * @param array $fields optional default value: empty array - defines which
      * fields are returned if no fields defined a star will be used
-     * @param WhereStatementInterface $where optional default value: null -
+     * @param null|WhereStatementInterface $where optional default value: null -
      * object used to limit the returned results
      * @param integer $fetchStyle optional default value: PDO::FETCH_ASSOC -
      * sets how the PDO statement will return records
@@ -97,7 +97,7 @@ class Query
      * @param array $data a single level associative array containing keys that
      * represent the fields and values that represent new values to be updated
      * into the table
-     * @param WhereStatementInterface $where an object that is designed to
+     * @param null|WhereStatementInterface $where an object that is designed to
      * return a where statement to limit the data that is affected by the update
      * @return Update the update object responsible to handling the update of
      * persistent records.
@@ -111,7 +111,7 @@ class Query
     /**
      * removes records from a PDO connected resource
      * @param string $table table with which you wish to remove records from
-     * @param WhereStatementInterface $where  an object that is designed to
+     * @param null|WhereStatementInterface $where  an object that is designed to
      * return a where statement to limit the data that is affected by the delete
      * @return Delete the delete object responsible for handling removal of
      * persistent records

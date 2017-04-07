@@ -36,11 +36,13 @@ interface WhereStatementInterface
      * returns just the expression of a PDO prepared where statement
      *
      * i.e. id = :id
+     * @return string expression of a PDO prepared where statement
      */
     public function getStatement();
 
     /**
      * Data provided to fulfill the requirements of the getStatement function
+     * @return array data to be provided to a prepared statement
      */
     public function getData();
 }
