@@ -72,7 +72,7 @@ trait WhereTrait
     /**
      * adds a where statement to a given statement
      * @param null|WhereStatementInterface $where where statement to be used added
-     * @return WhereTrait bubbling
+     * @return CommandInterface bubbling
      * @since v1.0.0
      */
     public function setWhere(WhereStatementInterface $where = null)

@@ -72,10 +72,10 @@ class Select implements CommandInterface
 
         $this->setTable($table)
             ->setFields($fields)
-            ->setWhere($where)
             ->setFetchStyle($fetchStyle)
             ->setFetchFlat($fetchFlat)
-            ->setDefaultValue($defaultValue);
+            ->setDefaultValue($defaultValue)
+            ->setWhere($where);
     }
 
     /**
@@ -274,7 +274,7 @@ class Select implements CommandInterface
 
     /**
      * Value to be returned if no data is found or query fails
-     * @param mixed $defaultValue optional default value: empty array - value to
+     * @param array $defaultValue optional default value: empty array - value to
      * be returned on query failure
      * @return Select for method chaining
      * @since v1.0.0
