@@ -29,7 +29,6 @@ namespace DSchoenbauer\Sql\Where;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-
 class ArrayWhere implements WhereStatementInterface
 {
 
@@ -39,39 +38,66 @@ class ArrayWhere implements WhereStatementInterface
     private $rowOperator = 'or';
     private $useParanthesis;
     private $saltSeed = 1;
+    private $statement;
 
     public function __construct($whereData, $fieldOperator = 'and', $rowOperator = 'or', $setUseParanthesis = true)
     {
-        $this->setWhereData($whereData)
-            ->setFieldOperator($fieldOperator)
+        $this->setFieldOperator($fieldOperator)
             ->setRowOperator($rowOperator)
-            ->setUseParanthesis($setUseParanthesis);
+            ->setUseParanthesis($setUseParanthesis)
+            ->setWhereData($whereData);
     }
 
     public function getStatement()
     {
-        return $this->recursiveStatement($this->getWhereData());
+        $this->build($this->getWhereData());
+        return $this->statement;
+    }
+
+    public function setStatement($statement)
+    {
+        $this->statement = $statement;
+        return $this;
+    }
+
+    protected function build(array $data)
+    {
+        $this->saltSeed = 1;
+        $this->setStatement($this->recursiveStatement($data));
     }
 
     protected function recursiveStatement(array $data)
     {
-        $sql = [];
+        $sqlStatements = [];
         if (!$this->isAssocArray($data)) {
             foreach ($data as $row) {
-                $sql[] = $this->recursiveStatement($row);
+                $sqlStatements[] = $this->recursiveStatement($row);
             }
         } else {
-            $sql[] = $this->buildRow($data, $this->saltSeed++);
+            $sqlStatements[] = $this->buildRow($data, $this->saltSeed);
+            $this->saltSeed++;
         }
-        return "(" . implode(") " . $this->getRowOperator() . " (", $sql) . ")";
+
+        list($prefix, $keyPrefix, $keySuffix, $suffix) = $this->getParenthesis($sqlStatements, 1);
+
+        return $prefix . implode($keySuffix . $this->getRowOperator() . $keyPrefix, $sqlStatements) . $suffix;
+    }
+
+    private function getParenthesis(array $qualifyingArray = [], $count = -1)
+    {
+        //prefix, keyPrefix, keySuffix, suffix
+        $parenthesis = [null, null, null, null];
+        if ($this->getUseParanthesis() && count($qualifyingArray) > $count) {
+            $parenthesis = ["(", " (", ") ", ")"];
+        }
+        return $parenthesis;
     }
 
     public function buildRow(array $assocArray, $keySalt)
     {
-        $prefix = $keySuffix = ($this->getUseParanthesis() ? "(" : "");
-        $suffix = $keyPrefix = ($this->getUseParanthesis() ? ")" : "");
+        list($prefix, $keySuffix, $keyPrefix,  $suffix) = $this->getParenthesis();
 
-        $glue = $keyPrefix . ' ' . $this->getFieldOperator() . ' ' . $keySuffix;
+        $glue = $keyPrefix . $this->getFieldOperator() . $keySuffix;
         return $prefix . implode($glue, array_map(function ($key, $value) use ($keySalt) {
                     $saltedKey = $key . "-" . $keySalt;
                     $this->addData($saltedKey, $value);
@@ -112,6 +138,7 @@ class ArrayWhere implements WhereStatementInterface
      */
     public function getData()
     {
+        $this->build($this->getWhereData());
         return $this->data;
     }
 

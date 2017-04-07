@@ -50,7 +50,7 @@ class Select implements CommandInterface
      * @param string $table name of the table that houses the data
      * @param array $fields optional default value: empty array - defines which
      * fields are returned if no fields defined a star will be used
-     * @param WhereStatementInterface $where optional default value: null -
+     * @param null|WhereStatementInterface $where optional default value: null -
      * object used to limit the returned results
      * @param integer $fetchStyle optional default value: PDO::FETCH_ASSOC -
      * sets how the PDO statement will return records
@@ -58,7 +58,6 @@ class Select implements CommandInterface
      * return one record, false will return all records
      * @param mixed $defaultValue optional default value: empty array -
      * value to be returned on query failure
-     * @return Select the select object responsible for retrieving records
      * @since v1.0.0
      */
     public function __construct(
@@ -73,10 +72,10 @@ class Select implements CommandInterface
 
         $this->setTable($table)
             ->setFields($fields)
-            ->setWhere($where)
             ->setFetchStyle($fetchStyle)
             ->setFetchFlat($fetchFlat)
-            ->setDefaultValue($defaultValue);
+            ->setDefaultValue($defaultValue)
+            ->setWhere($where);
     }
 
     /**
@@ -208,7 +207,7 @@ class Select implements CommandInterface
 
     /**
      * Defines the fields to be returned, if no fields defined all fields are returned
-     * @param array $fields
+     * @param null|array $fields
      * @return Select for method chaining
      * @since v1.0.0
      */
@@ -275,7 +274,7 @@ class Select implements CommandInterface
 
     /**
      * Value to be returned if no data is found or query fails
-     * @param mixed $defaultValue optional default value: empty array - value to
+     * @param array $defaultValue optional default value: empty array - value to
      * be returned on query failure
      * @return Select for method chaining
      * @since v1.0.0
