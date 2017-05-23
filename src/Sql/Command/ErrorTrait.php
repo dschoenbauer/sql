@@ -29,10 +29,16 @@ trait ErrorTrait
         $this->isStrict = boolval($isStrict);
         return $this;
     }
-    
+
+    /**
+     * Throws an exception if no records are found / affected
+     * @param PDOStatement $statement
+     * @return boolean
+     * @throws NoRecordsAffectedException
+     */
     public function checkAffected(PDOStatement $statement)
     {
-        if ($statement->rowCount() === 0 && $this->getIsStrict()) {
+        if (!boolval($statement->rowCount()) && $this->getIsStrict()) {
             throw new NoRecordsAffectedException();
         }
         return true;

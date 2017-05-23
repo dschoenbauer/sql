@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,11 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use PDOStatement;
 use PHPUnit_Framework_TestCase;
@@ -37,76 +36,95 @@ use PHPUnit_Framework_TestCase;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class CreateTest extends PHPUnit_Framework_TestCase {
+class CreateTest extends PHPUnit_Framework_TestCase
+{
 
     private $_object;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->_object = new Create('someTable', []);
     }
 
-    public function testTable() {
+    public function testTable()
+    {
         $this->assertEquals("someTable", $this->_object->getTable());
         $this->assertEquals("someOtherTable", $this->_object->setTable('someOtherTable')->getTable());
     }
-    
-    public function testData(){
-        $this->assertEquals([],$this->_object->getData());
-        $data = ['test'=>'test'];
-        $this->assertEquals($data,$this->_object->setData($data)->getData());
+
+    public function testData()
+    {
+        $this->assertEquals([], $this->_object->getData());
+        $data = ['test' => 'test'];
+        $this->assertEquals($data, $this->_object->setData($data)->getData());
     }
-    
-    public function testGetSqlEmptyData(){
+
+    public function testGetSqlEmptyData()
+    {
         $this->expectException(EmptyDatasetException::class);
         $this->_object->getSql();
     }
-    
-    
-    public function testGetSqlSingleField(){
+
+    public function testGetSqlSingleField()
+    {
         $sql = "INSERT INTO someTable (data) VALUES (:data)";
-        $this->assertEquals($sql, $this->_object->setData(['data'=>'notUsedHere'])->getSql());
+        $this->assertEquals($sql, $this->_object->setData(['data' => 'notUsedHere'])->getSql());
     }
-    
-    public function testGetSqlMoreFields(){
+
+    public function testGetSqlMoreFields()
+    {
         $sql = "INSERT INTO someTable (id, name, data) VALUES (:id, :name, :data)";
-        $data = ['id'=>'name','name'=>'someName','data'=>'notUsedHere'];
+        $data = ['id' => 'name', 'name' => 'someName', 'data' => 'notUsedHere'];
         $this->assertEquals($sql, $this->_object->setData($data)->getSql());
     }
-    
-    public function testExecute(){
-        $this->_object->setData(['data'=>1]);
+
+    public function testExecute()
+    {
+        $this->_object->setData(['data' => 1]);
         $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
-                ->method('execute')
-                ->with($this->_object->getData())
-                ->willReturn(true);
-        
+            ->method('execute')
+            ->with($this->_object->getData())
+            ->willReturn(true);
+
         $mock = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mock->expects($this->once())
-                ->method('prepare')
-                ->with($this->_object->getSql())
-                ->willReturn($mockStatement);
+            ->method('prepare')
+            ->with($this->_object->getSql())
+            ->willReturn($mockStatement);
         $mock->expects($this->once())
-                ->method('lastInsertId')
-                ->willReturn(1447);        
-        $this->assertEquals(1447,$this->_object->execute($mock));
-                
+            ->method('lastInsertId')
+            ->willReturn(1447);
+        $this->assertEquals(1447, $this->_object->execute($mock));
     }
-    public function testExecuteFail(){
-        $this->_object->setData(['data'=>1]);
+
+    public function testExecuteNoRecords()
+    {
+        $this->expectException(NoRecordsAffectedException::class);
+        $this->_object->setData(['data' => 1]);
+        $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
+        $mockStatement->expects($this->once())->method('execute')->with($this->_object->getData())->willReturn(true);
+
+        $mock = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
+        $mock->expects($this->once())->method('prepare')->with($this->_object->getSql())->willReturn($mockStatement);
+        $this->_object->setIsStrict()->execute($mock);
+    }
+
+    public function testExecuteFail()
+    {
+        $this->_object->setData(['data' => 1]);
         $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
-                ->method('execute')
-                ->with($this->_object->getData())
-                ->willReturn(false);
-        
+            ->method('execute')
+            ->with($this->_object->getData())
+            ->willReturn(false);
+
         $mock = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mock->expects($this->once())
-                ->method('prepare')
-                ->with($this->_object->getSql())
-                ->willReturn($mockStatement);
+            ->method('prepare')
+            ->with($this->_object->getSql())
+            ->willReturn($mockStatement);
         $this->expectException(ExecutionErrorException::class);
         $this->_object->execute($mock);
-                
     }
 }
