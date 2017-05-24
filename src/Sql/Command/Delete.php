@@ -35,12 +35,11 @@ use PDO;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Delete implements CommandInterface
+class Delete extends AbstractCommand
 {
 
     private $table;
 
-    use ErrorTrait;
     use WhereTrait;
 
     /**

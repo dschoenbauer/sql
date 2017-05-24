@@ -35,7 +35,7 @@ use PDOStatement;
  * retrieves data from a PDO connected resource
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class Select implements CommandInterface
+class Select extends AbstractCommand
 {
 
     private $table;
@@ -45,7 +45,6 @@ class Select implements CommandInterface
     private $fetchFlat = false;
     private $defaultValue = [];
 
-    use ErrorTrait;
     use WhereTrait;
 
     /**
@@ -72,6 +71,7 @@ class Select implements CommandInterface
         $defaultValue = []
     ) {
     
+
 
         $this->setTable($table)
             ->setFields($fields)

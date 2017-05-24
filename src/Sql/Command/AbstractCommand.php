@@ -14,7 +14,7 @@ use PDOStatement;
  *
  * @author David Schoenbauer
  */
-trait ErrorTrait
+abstract class AbstractCommand implements CommandInterface
 {
 
     private $isStrict = false;
