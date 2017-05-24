@@ -25,6 +25,7 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 
@@ -38,6 +39,7 @@ class Delete implements CommandInterface
 
     private $table;
 
+    use ErrorTrait;
     use WhereTrait;
 
     /**
@@ -63,9 +65,14 @@ class Delete implements CommandInterface
         try {
             $stmt = $pdo->prepare($this->getSql());
             if (count($this->getData()) > 0) {
-                return $stmt->execute($this->getData());
+                $result = $stmt->execute($this->getData());
+            } else {
+                $result = $stmt->execute();
             }
-            return $stmt->execute();
+            $this->checkAffected($stmt);
+            return $result;
+        } catch (NoRecordsAffectedException $exc) {
+            throw $exc;
         } catch (\Exception $exc) {
             throw new ExecutionErrorException($exc->getMessage());
         }
