@@ -26,6 +26,8 @@ namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedCreateException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
 use PDO;
 
 /**
@@ -35,6 +37,8 @@ use PDO;
  */
 class Create implements CommandInterface
 {
+
+    use ErrorTrait;
 
     private $table;
     private $data;
@@ -92,7 +96,10 @@ class Create implements CommandInterface
             if (!$stmt->execute($this->getData())) {
                 throw new ExecutionErrorException($stmt->errorInfo()[2]);
             }
+            $this->checkAffected($stmt, new NoRecordsAffectedCreateException());
             return $pdo->lastInsertId();
+        } catch (NoRecordsAffectedException $exc) {
+            throw $exc;
         } catch (\Exception $exc) {
             throw new ExecutionErrorException($exc->getMessage());
         }
