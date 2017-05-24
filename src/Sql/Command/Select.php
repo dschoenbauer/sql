@@ -25,6 +25,8 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedSelectException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 use PDOStatement;
@@ -43,6 +45,7 @@ class Select implements CommandInterface
     private $fetchFlat = false;
     private $defaultValue = [];
 
+    use ErrorTrait;
     use WhereTrait;
 
     /**
@@ -90,6 +93,7 @@ class Select implements CommandInterface
         try {
             $stmt = $pdo->prepare($this->getSql());
             $this->statementExecute($stmt, $this->getWhereData());
+            $this->checkAffected($stmt, new NoRecordsAffectedSelectException());
             $data = $this->fetchData(
                 $stmt,
                 $this->getFetchFlat(),
@@ -97,6 +101,8 @@ class Select implements CommandInterface
             );
             $this->setData($data ?: $this->getDefaultValue());
             return $this->getData();
+        } catch (NoRecordsAffectedException $exc) {
+            throw $exc;
         } catch (\Exception $exc) {
             throw new ExecutionErrorException($exc->getMessage());
         }

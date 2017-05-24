@@ -26,6 +26,8 @@ namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedUpdateException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 
@@ -40,6 +42,7 @@ class Update implements CommandInterface
     private $table;
     private $data = [];
 
+    use ErrorTrait;
     use WhereTrait;
 
     /**
@@ -65,17 +68,20 @@ class Update implements CommandInterface
      * @param PDO $pdo a connection object that defines where the connection is
      * to be executed
      * @return bool TRUE on success or FALSE on failure.
-     * @throws EmptyDatasetException  if no data has been set no fields can be
-     * discerned and no query can be made
-     * @throws ExecutionErrorException thrown when any exception or SQL failure
-     * occurs
+     * @throws NoRecordsAffectedException  if strict is set to true an exception will be thrown if
+     * @throws EmptyDatasetException  if no data has been set no fields can be discerned and no query can be made
+     * @throws ExecutionErrorException thrown when any exception or SQL failure occurs
      * @since v1.0.0
      */
     public function execute(PDO $pdo)
     {
         try {
             $stmt = $pdo->prepare($this->getSql());
-            return $stmt->execute($this->getCombinedData());
+            $result = $stmt->execute($this->getCombinedData());
+            $this->checkAffected($stmt, new NoRecordsAffectedUpdateException());
+            return $result;
+        } catch (NoRecordsAffectedException $exc) {
+            throw $exc;
         } catch (EmptyDatasetException $exc) {
             throw $exc;
         } catch (\Exception $exc) {

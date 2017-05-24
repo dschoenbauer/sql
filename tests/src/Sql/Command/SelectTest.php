@@ -1,5 +1,4 @@
 <?php
-
 /*
  * The MIT License
  *
@@ -23,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedSelectException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use Exception;
@@ -39,165 +38,209 @@ use PHPUnit_Framework_TestCase;
  *
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  */
-class SelectTest extends PHPUnit_Framework_TestCase {
+class SelectTest extends PHPUnit_Framework_TestCase
+{
 
     private $_object;
 
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->_object = new Select("someTable");
     }
 
-    public function testFetchStyleConstructor() {
+    public function testFetchStyleConstructor()
+    {
         $this->assertEquals(PDO::FETCH_ASSOC, $this->_object->getFetchStyle());
     }
 
-    public function testFetchStyle() {
+    public function testFetchStyle()
+    {
         $test = \PDO::FETCH_UNIQUE || \PDO::FETCH_ASSOC;
         $this->assertEquals($test, $this->_object->setFetchStyle($test)->getFetchStyle());
     }
 
-    public function testFieldsConstructor() {
+    public function testFieldsConstructor()
+    {
         $this->assertEquals(["*"], $this->_object->getFields());
     }
 
-    public function testFields() {
+    public function testFields()
+    {
         $fields = ['id', 'name'];
         $this->assertEquals($fields, $this->_object->setFields($fields)->getFields());
     }
 
-    public function testFieldsNull() {
+    public function testFieldsNull()
+    {
         $fields = null;
         $this->assertEquals(["*"], $this->_object->setFields($fields)->getFields());
     }
 
-    public function testFieldsEmpty() {
+    public function testFieldsEmpty()
+    {
         $fields = [];
         $this->assertEquals(["*"], $this->_object->setFields($fields)->getFields());
     }
 
-    public function testTable() {
+    public function testTable()
+    {
         $this->assertEquals('someOtherTest', $this->_object->setTable('someOtherTest')->getTable());
     }
 
-    public function testTableConstructor() {
+    public function testTableConstructor()
+    {
         $this->assertEquals('someTable', $this->_object->getTable());
     }
 
-    public function testFetchFlatConstructor() {
+    public function testFetchFlatConstructor()
+    {
         $this->assertFalse($this->_object->getFetchFlat());
     }
 
-    public function testDefaultValueConstructor() {
+    public function testDefaultValueConstructor()
+    {
         $this->assertEquals([], $this->_object->getDefaultValue());
     }
 
-    public function testData() {
+    public function testData()
+    {
         $this->assertEquals([], $this->_object->getData());
         $this->assertEquals(['id', 'name'], $this->_object->setData(['id', 'name'])->getData());
     }
 
-    public function testSql() {
+    public function testSql()
+    {
         $expected = "SELECT * FROM someTable";
         $this->assertEquals($expected, $this->_object->getSql());
     }
 
-    public function testExecuteFetchFlatWithWhereDefaultData() {
+    public function testExecuteFetchFlatWithWhereDefaultData()
+    {
         $this->assertEquals([], $this->_object
-                        ->setFetchFlat()
-                        ->setWhere($this->getWhere(['id' => 1], "id = 1"))
-                        ->execute($this->getMockPDO(true, ['id' => 1], false)));
+                ->setFetchFlat()
+                ->setWhere($this->getWhere(['id' => 1], "id = 1"))
+                ->execute($this->getMockPDO(true, ['id' => 1], false)));
     }
 
-    public function testExecuteFetchFlatNoWhereDefaultData() {
+    public function testExecuteFetchFlatNoWhereDefaultData()
+    {
         $this->assertEquals([], $this->_object
-                        ->setFetchFlat()
-                        ->execute($this->getMockPDO(true, null, false)));
+                ->setFetchFlat()
+                ->execute($this->getMockPDO(true, null, false)));
     }
 
-    public function testExecuteFetchFlatWithWhereWithData() {
+    public function testExecuteFetchFlatWithWhereWithData()
+    {
         $data = ['id' => 1, 'name' => 'Bob'];
         $this->assertEquals($data, $this->_object
-                        ->setFetchFlat()
-                        ->setWhere($this->getWhere(['id' => 1], "id = 1"))
-                        ->execute($this->getMockPDO(true, ['id' => 1], $data)));
+                ->setFetchFlat()
+                ->setWhere($this->getWhere(['id' => 1], "id = 1"))
+                ->execute($this->getMockPDO(true, ['id' => 1], $data)));
     }
 
-    public function testExecuteFetchFlatNoWhereWithData() {
+    public function testExecuteFetchFlatNoWhereWithData()
+    {
         $data = ['id' => 1, 'name' => 'Bob'];
         $this->assertEquals($data, $this->_object
-                        ->setFetchFlat()
-                        ->execute($this->getMockPDO(true, null, $data)));
+                ->setFetchFlat()
+                ->execute($this->getMockPDO(true, null, $data)));
     }
 
-    public function testExecuteFetchFullWithWhereDefaultData() {
+    public function testExecuteFetchFullWithWhereDefaultData()
+    {
         $this->assertEquals([], $this->_object
-                        ->setFetchFlat(false)
-                        ->setWhere($this->getWhere(['id' => 1], "id = 1"))
-                        ->execute($this->getMockPDO(false, ['id' => 1], false)));
+                ->setFetchFlat(false)
+                ->setWhere($this->getWhere(['id' => 1], "id = 1"))
+                ->execute($this->getMockPDO(false, ['id' => 1], false)));
     }
 
-    public function testExecuteFetchFullNoWhereDefaultData() {
+    public function testExecuteFetchFullNoWhereDefaultData()
+    {
         $this->assertEquals([], $this->_object
-                        ->setFetchFlat(false)
-                        ->execute($this->getMockPDO(false, null, false)));
+                ->setFetchFlat(false)
+                ->execute($this->getMockPDO(false, null, false)));
     }
 
-    public function testExecuteFetchFullWithWhereWithData() {
+    public function testExecuteFetchFullWithWhereWithData()
+    {
         $data = ['id' => 1, 'name' => 'Bob'];
         $this->assertEquals($data, $this->_object
-                        ->setFetchFlat(false)
-                        ->setWhere($this->getWhere(['id' => 1], "id = 1"))
-                        ->execute($this->getMockPDO(false, ['id' => 1], $data)));
+                ->setFetchFlat(false)
+                ->setWhere($this->getWhere(['id' => 1], "id = 1"))
+                ->execute($this->getMockPDO(false, ['id' => 1], $data)));
     }
 
-    public function testExecuteFetchFullNoWhereWithData() {
+    public function testExecuteFetchFullNoWhereWithData()
+    {
         $data = ['id' => 1, 'name' => 'Bob'];
         $this->assertEquals($data, $this->_object
-                        ->setFetchFlat(false)
-                        ->execute($this->getMockPDO(false, null, $data)));
+                ->setFetchFlat(false)
+                ->execute($this->getMockPDO(false, null, $data)));
     }
 
-    public function testExecuteFail() {
+    public function testExecuteStrictNoRecords()
+    {
+        $data = [];
+        $this->expectException(NoRecordsAffectedSelectException::class);
+        $this->assertEquals($data, $this->_object
+                ->setIsStrict()
+                ->setFetchFlat(false)
+                ->execute($this->getMockPDO(false, null, $data, false)));
+    }
+
+    public function testExecuteFail()
+    {
         $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
-                ->method('prepare')
-                ->willThrowException(new Exception('test'));
+            ->method('prepare')
+            ->willThrowException(new Exception('test'));
         $data = ['id' => 1, 'name' => 'Bob'];
         $this->expectException(ExecutionErrorException::class);
         $this->expectExceptionMessage('test');
         $this->_object->execute($mockPdo);
     }
 
-    public function getWhere(array $whereData = [], $statement = null) {
+    public function getWhere(array $whereData = [], $statement = null)
+    {
         $mock = $this->getMockBuilder(WhereStatementInterface::class)->getMock();
         $mock->expects($this->once())
-                ->method('getData')->willReturn($whereData);
+            ->method('getData')->willReturn($whereData);
         $mock->expects($this->exactly(2))
-                ->method('getStatement')->willReturn($statement);
+            ->method('getStatement')->willReturn($statement);
         return $mock;
     }
 
-    public function getMockPDO($fetchFlat, $whereData = null, $fetchedData = true) {
+    public function getMockPDO($fetchFlat, $whereData = null, $fetchedData = false, $expectFetch = true)
+    {
         $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $execute = $mockStatement->expects($this->once())
-                ->method('execute')
-                ->willReturn(true);
+            ->method('execute')
+            ->willReturn(true);
         if ($whereData) {
             $execute->with($whereData);
         }
-        $mockStatement->
+        $val = $fetchFlat && is_array($fetchedData) ? 1 :
+            !$fetchFlat && is_array($fetchedData) ? count($fetchedData) :
+            0;
+        $mockStatement
+            ->expects($this->any())
+            ->method('rowCount')
+            ->willReturn($val);
+
+        if ($expectFetch) {
+            $mockStatement->
                 expects($fetchFlat ? $this->once() : $this->never())
                 ->method('fetch')->willReturn($fetchedData);
-        $mockStatement->
+            $mockStatement->
                 expects(!$fetchFlat ? $this->once() : $this->never())
                 ->method('fetchAll')->willReturn($fetchedData);
+        }
 
         $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())
-                ->method('prepare')
-                ->with($this->_object->getSql())
-                ->willReturn($mockStatement);
+            ->method('prepare')
+            ->with($this->_object->getSql())
+            ->willReturn($mockStatement);
         return $mockPdo;
     }
-
 }
