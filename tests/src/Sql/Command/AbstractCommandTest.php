@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @author David Schoenbauer
  */
-class ErrorTraitTest extends TestCase
+class AbstractCommandTest extends TestCase
 {
 
     /**
@@ -26,7 +26,7 @@ class ErrorTraitTest extends TestCase
 
     protected function setUp()
     {
-        $this->object = $this->getMockForTrait(ErrorTrait::class);
+        $this->object = $this->getMockForAbstractClass(AbstractCommand::class);
     }
 
     public function testIsStrict()
