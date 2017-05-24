@@ -36,13 +36,12 @@ use PDO;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  * @since v1.0.0
  */
-class Update implements CommandInterface
+class Update extends AbstractCommand
 {
 
     private $table;
     private $data = [];
 
-    use ErrorTrait;
     use WhereTrait;
 
     /**

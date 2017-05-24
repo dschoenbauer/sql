@@ -35,10 +35,9 @@ use PDO;
  * @author David Schoenbauer <dschoenbauer@gmail.com>
  * @since v1.0.0
  */
-class Create implements CommandInterface
+class Create extends AbstractCommand
 {
 
-    use ErrorTrait;
 
     private $table;
     private $data;
