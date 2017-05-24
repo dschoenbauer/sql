@@ -33,13 +33,18 @@ trait ErrorTrait
     /**
      * Throws an exception if no records are found / affected
      * @param PDOStatement $statement
+     * @param \Exception $exceptionToThrow
      * @return boolean
      * @throws NoRecordsAffectedException
      */
-    public function checkAffected(PDOStatement $statement)
+    
+    public function checkAffected(PDOStatement $statement, \Exception $exceptionToThrow = null)
     {
+        if (!$exceptionToThrow instanceof \Exception) {
+            $exceptionToThrow = new NoRecordsAffectedException();
+        }
         if (!boolval($statement->rowCount()) && $this->getIsStrict()) {
-            throw new NoRecordsAffectedException();
+            throw $exceptionToThrow;
         }
         return true;
     }

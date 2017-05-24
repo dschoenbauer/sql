@@ -26,6 +26,7 @@ namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedSelectException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 use PDOStatement;
@@ -92,7 +93,7 @@ class Select implements CommandInterface
         try {
             $stmt = $pdo->prepare($this->getSql());
             $this->statementExecute($stmt, $this->getWhereData());
-            $this->checkAffected($stmt);
+            $this->checkAffected($stmt, new NoRecordsAffectedSelectException());
             $data = $this->fetchData(
                 $stmt,
                 $this->getFetchFlat(),

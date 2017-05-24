@@ -27,6 +27,7 @@ namespace DSchoenbauer\Sql\Command;
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
 use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedUpdateException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use PDO;
 
@@ -77,7 +78,7 @@ class Update implements CommandInterface
         try {
             $stmt = $pdo->prepare($this->getSql());
             $result = $stmt->execute($this->getCombinedData());
-            $this->checkAffected($stmt);
+            $this->checkAffected($stmt, new NoRecordsAffectedUpdateException());
             return $result;
         } catch (NoRecordsAffectedException $exc) {
             throw $exc;

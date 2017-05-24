@@ -26,7 +26,7 @@ namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
-use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedUpdateException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use PDOStatement;
@@ -182,7 +182,7 @@ class UpdateTest extends PHPUnit_Framework_TestCase
         $mockPdo = $this->getMockBuilder(MockPdo::class)->disableOriginalConstructor()->getMock();
         $mockPdo->expects($this->once())->method('prepare')->willReturn($statement);
         
-        $this->expectException(NoRecordsAffectedException::class);
+        $this->expectException(NoRecordsAffectedUpdateException::class);
         $this->_object->setIsStrict()->execute($mockPdo);
     }
 }

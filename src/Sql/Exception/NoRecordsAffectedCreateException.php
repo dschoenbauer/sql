@@ -24,27 +24,12 @@
  */
 namespace DSchoenbauer\Sql\Exception;
 
-use PHPUnit\Framework\TestCase;
-
 /**
- * Description of NoRecordsAffectedExceptionTest
+ * Description of NoRecordsAffectedCreateException
  *
  * @author David Schoenbauer
  */
-class NoRecordsAffectedExceptionTest extends TestCase
+class NoRecordsAffectedCreateException extends NoRecordsAffectedException
 {
 
-    protected function setUp()
-    {
-        $this->object = new NoRecordsAffectedException();
-    }
-
-    public function testHasBaseInterface()
-    {
-        $this->assertInstanceOf(SqlExceptionInterface::class, $this->object);
-    }
-    
-    public function testHasCorrectParent(){
-        
-    }
 }

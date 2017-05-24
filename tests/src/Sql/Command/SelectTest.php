@@ -25,7 +25,7 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
-use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedSelectException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use Exception;
@@ -181,7 +181,7 @@ class SelectTest extends PHPUnit_Framework_TestCase
     public function testExecuteStrictNoRecords()
     {
         $data = [];
-        $this->expectException(NoRecordsAffectedException::class);
+        $this->expectException(NoRecordsAffectedSelectException::class);
         $this->assertEquals($data, $this->_object
                 ->setIsStrict()
                 ->setFetchFlat(false)

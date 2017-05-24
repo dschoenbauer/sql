@@ -26,7 +26,7 @@ namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\EmptyDatasetException;
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
-use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedCreateException;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use PDOStatement;
 use PHPUnit_Framework_TestCase;
@@ -100,7 +100,7 @@ class CreateTest extends PHPUnit_Framework_TestCase
 
     public function testExecuteNoRecords()
     {
-        $this->expectException(NoRecordsAffectedException::class);
+        $this->expectException(NoRecordsAffectedCreateException::class);
         $this->_object->setData(['data' => 1]);
         $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())->method('execute')->with($this->_object->getData())->willReturn(true);

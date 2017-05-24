@@ -27,7 +27,7 @@
 namespace DSchoenbauer\Sql\Command;
 
 use DSchoenbauer\Sql\Exception\ExecutionErrorException;
-use DSchoenbauer\Sql\Exception\NoRecordsAffectedException;
+use DSchoenbauer\Sql\Exception\NoRecordsAffectedDeleteException;
 use DSchoenbauer\Sql\Where\WhereStatementInterface;
 use DSchoenbauer\Tests\Sql\MockPdo;
 use PDOStatement;
@@ -120,7 +120,7 @@ class DeleteTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testExecuteStrict() {
-        $this->expectException(NoRecordsAffectedException::class);
+        $this->expectException(NoRecordsAffectedDeleteException::class);
         $mockStatement = $this->getMockBuilder(PDOStatement::class)->getMock();
         $mockStatement->expects($this->once())
                 ->method('execute')
