@@ -104,8 +104,10 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
     public function testData()
     {
-        $this->assertEquals([], $this->_object->getData());
+        $this->assertEquals(null, $this->_object->getData());
         $this->assertEquals(['id', 'name'], $this->_object->setData(['id', 'name'])->getData());
+        $this->assertEquals(false, $this->_object->setData(false)->getData());
+        $this->assertEquals('test', $this->_object->setData('test')->getData());
     }
 
     public function testSql()
