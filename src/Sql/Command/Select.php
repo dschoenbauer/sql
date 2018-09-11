@@ -40,7 +40,7 @@ class Select extends AbstractCommand
 
     private $table;
     private $fields = ['*'];
-    private $data = [];
+    private $data = null;
     private $fetchStyle = \PDO::FETCH_ASSOC;
     private $fetchFlat = false;
     private $defaultValue = [];
@@ -159,11 +159,11 @@ class Select extends AbstractCommand
 
     /**
      * acts as a cache to house ran queries
-     * @param array $data data to be stored
+     * @param mixed $data data to be stored
      * @return Select for method chaining
      * @since v1.0.0
      */
-    public function setData(array $data)
+    public function setData($data)
     {
         $this->data = $data;
         return $this;
