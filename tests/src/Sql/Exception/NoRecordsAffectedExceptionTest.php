@@ -24,6 +24,7 @@
  */
 namespace DSchoenbauer\Sql\Exception;
 
+use DSchoenbauer\Exception\Http\ClientError\ConflictException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -33,6 +34,7 @@ use PHPUnit\Framework\TestCase;
  */
 class NoRecordsAffectedExceptionTest extends TestCase
 {
+    private $object;
 
     protected function setUp()
     {
@@ -45,6 +47,6 @@ class NoRecordsAffectedExceptionTest extends TestCase
     }
     
     public function testHasCorrectParent(){
-        
+        $this->assertInstanceOf(ConflictException::class, $this->object);
     }
 }

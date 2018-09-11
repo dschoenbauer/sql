@@ -24,14 +24,14 @@
  */
 namespace DSchoenbauer\Sql\Exception;
 
-use DSchoenbauer\Exception\Http\ClientError\NotFoundException;
+use DSchoenbauer\Exception\Http\ClientError\ConflictException;
 
 /**
  * No Records are being impacted by the query
  *
  * @author David Schoenbauer
  */
-class NoRecordsAffectedException extends NotFoundException implements SqlExceptionInterface
+class NoRecordsAffectedException extends ConflictException implements SqlExceptionInterface
 {
     
 }
